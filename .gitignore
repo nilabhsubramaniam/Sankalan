@@ -40,14 +40,10 @@ testem.log
 *.njsproj
 *.sln
 
-# ── VS Code (keep shared config, ignore personal) ─────────────
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/mcp.json
-.history/*
+# ── IDEs / editors ───────────────────────────────────────────
+.vscode/
+.editorconfig
+.history/
 
 # ── OS artefacts ──────────────────────────────────────────────
 .DS_Store
