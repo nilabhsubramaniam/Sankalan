@@ -1,0 +1,174 @@
+@use '../../../../styles/base/mixins' as *;
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  // ── Canvas fills the hero
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: var(--z-below);
+    display: block;
+  }
+
+  // ── Vignette: dark wash on text side, stars still visible on right
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 75% at 15% 65%,
+        rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 58%, transparent 100%),
+      linear-gradient(180deg,
+        rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.0) 40%, rgba(0, 0, 0, 0.55) 100%);
+    z-index: var(--z-base);
+    pointer-events: none;
+  }
+
+  // ── Main content: vertically centered, left-aligned
+  &__content {
+    position: relative;
+    z-index: var(--z-raised);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    padding-top: clamp(88px, 12vh, 120px);
+    padding-bottom: var(--space-24);
+  }
+
+  // ── Small uppercase role label
+  &__label {
+    display: block;
+    font-size: clamp(0.58rem, 1vw, 0.7rem);
+    font-weight: var(--weight-regular);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.34);
+    margin-bottom: clamp(var(--space-6), 3.5vw, var(--space-10));
+  }
+
+  // ── Giant editorial serif headline — the centrepiece
+  &__headline {
+    font-family: var(--font-serif);
+    font-size: var(--text-display);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+    margin-bottom: clamp(var(--space-10), 5vw, var(--space-16));
+
+    em {
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.58);
+    }
+  }
+
+  // ── Text-link CTAs (no buttons)
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(var(--space-6), 4vw, var(--space-12));
+  }
+
+  &__link {
+    font-size: clamp(0.6rem, 1vw, 0.72rem);
+    font-weight: var(--weight-regular);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 3px;
+    transition: color 0.35s ease;
+
+    span {
+      display: inline-block;
+      margin-left: 3px;
+      transition: transform 0.3s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+      transition: width 0.4s ease;
+    }
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      span { transform: translate(3px, -3px); }
+      &::after { width: 100%; }
+    }
+  }
+
+  // ── Bottom-right micro stack label
+  &__meta {
+    position: absolute;
+    bottom: var(--space-8);
+    right: var(--container-pad);
+    z-index: var(--z-raised);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.16);
+  }
+
+  &__meta-dot { opacity: 0.45; }
+
+  // ── Scroll cue (bottom-center)
+  &__scroll {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: var(--z-raised);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  &__scroll-line {
+    display: block;
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.26));
+    animation: scrollDrop 2.4s ease-in-out infinite;
+  }
+
+  &__scroll-label {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.16);
+  }
+}
+
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top;    opacity: 0; }
+  50%  { transform: scaleY(1); transform-origin: top;    opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+@include respond-to('lg') {
+  .hero__content {
+    padding-top: clamp(110px, 14vh, 130px);
+  }
+}
+

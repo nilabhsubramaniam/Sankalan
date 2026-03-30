@@ -1,0 +1,98 @@
+@use '../../../styles/base/mixins' as *;
+
+.skills {
+  &__tabs {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-12);
+  }
+
+  &__tab {
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &:hover {
+      color: var(--color-text-primary);
+      border-color: var(--color-border-accent);
+    }
+
+    &--active {
+      background: rgba(201, 168, 76, 0.12);
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      font-weight: var(--weight-semibold);
+    }
+  }
+
+  &__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+
+    @include respond-to('sm') { grid-template-columns: repeat(2, 1fr); }
+    @include respond-to('lg') { grid-template-columns: repeat(3, 1fr); }
+    @include respond-to('xl') { grid-template-columns: repeat(4, 1fr); }
+  }
+}
+
+.skill-card {
+  @include glass-card;
+  padding: var(--space-5);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  &__header {
+    @include flex-between;
+    margin-bottom: var(--space-3);
+  }
+
+  &__name {
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  &__level {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+  }
+
+  &__bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--space-3);
+  }
+
+  &__fill {
+    height: 100%;
+    background: var(--gradient-gold);
+    border-radius: var(--radius-full);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__category {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+}

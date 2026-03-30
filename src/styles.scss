@@ -1,0 +1,17 @@
+// ============================================================
+// Global Styles Entry Point
+// ============================================================
+
+// 1. Design Tokens (CSS custom properties)
+@use 'styles/tokens/colors';
+@use 'styles/tokens/spacing';
+@use 'styles/tokens/typography';
+
+// 2. Base reset & element styles
+@use 'styles/base/reset';
+
+// 3. Utility classes
+@use 'styles/components/utilities';
+
+// 4. Google Fonts (Inter + JetBrains Mono)
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');

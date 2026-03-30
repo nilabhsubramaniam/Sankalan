@@ -1,0 +1,56 @@
+// ============================================================
+// Reusable component-level utility classes
+// ============================================================
+@use '../base/mixins' as *;
+
+// Layout utilities
+.container { @include container; }
+
+.section {
+  @include section-padding;
+  position: relative;
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+
+  .section__label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-4);
+  }
+
+  .section__title {
+    margin-bottom: var(--space-4);
+  }
+
+  .section__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 55ch;
+    margin-inline: auto;
+  }
+}
+
+// Gold gradient text
+.text-gradient { @include gold-text; }
+
+// Flex
+.flex-center { @include flex-center; }
+.flex-between { @include flex-between; }
+
+// Glass card
+.glass-card { @include glass-card; }
+
+// Visually hidden
+.visually-hidden { @include visually-hidden; }
+
+// Fade in utility (GSAP targets)
+.fade-in { opacity: 0; transform: translateY(20px); }
+.slide-in-left  { opacity: 0; transform: translateX(-40px); }
+.slide-in-right { opacity: 0; transform: translateX(40px); }

@@ -1,0 +1,110 @@
+// ============================================================
+// CSS Reset & Base Styles
+// ============================================================
+@use '../tokens/colors';
+@use '../tokens/spacing';
+@use '../tokens/typography';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Hide native cursor on precise-pointer devices (custom cursor replaces it)
+@media (hover: hover) and (pointer: fine) {
+  html, html * { cursor: none !important; }
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  overflow-x: hidden;
+}
+
+// Typography base
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: var(--text-hero); }
+h2 { font-size: var(--text-5xl); }
+h3 { font-size: var(--text-3xl); }
+h4 { font-size: var(--text-2xl); }
+h5 { font-size: var(--text-xl); }
+h6 { font-size: var(--text-lg); }
+
+p {
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 65ch;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+
+  &:hover { color: var(--color-accent-light); }
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+// Selection
+::selection {
+  background: rgba(201, 168, 76, 0.25);
+  color: var(--color-text-primary);
+}
+
+// Scrollbar
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-dark);
+  border-radius: var(--radius-full);
+}
+
+// Focus outline for keyboard nav
+:focus:not(:focus-visible) { outline: none; }

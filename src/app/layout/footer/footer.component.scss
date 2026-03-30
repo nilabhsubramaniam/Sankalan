@@ -1,0 +1,88 @@
+@use '../../../styles/base/mixins' as *;
+
+.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+
+  &__inner {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    padding-block: var(--space-12);
+  }
+
+  &__brand { max-width: 260px; }
+
+  &__logo {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-black);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    margin-bottom: var(--space-3);
+    letter-spacing: var(--tracking-tighter);
+  }
+
+  &__tagline {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 100%;
+  }
+
+  &__nav {
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+    }
+  }
+
+  &__link {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover { color: var(--color-accent); }
+  }
+
+  &__social {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    transition: all var(--transition-base);
+
+    &:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      background: rgba(201, 168, 76, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__bottom {
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__copy {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 100%;
+  }
+}

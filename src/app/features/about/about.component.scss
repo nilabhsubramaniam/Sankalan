@@ -1,0 +1,137 @@
+@use '../../../styles/base/mixins' as *;
+
+.about {
+  &__bio {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: center;
+    padding-block: var(--space-24);
+
+    @include respond-to('lg') {
+      grid-template-columns: 1fr auto;
+      gap: var(--space-20);
+    }
+  }
+
+  &__bio-text {
+    .section__label { margin-bottom: var(--space-4); }
+  }
+
+  &__name {
+    font-size: var(--text-5xl);
+    font-weight: var(--weight-black);
+    margin-bottom: var(--space-6);
+  }
+
+  &__desc {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 55ch;
+    margin-bottom: var(--space-4);
+  }
+
+  &__avatar {
+    position: relative;
+    width: 280px;
+    flex-shrink: 0;
+    margin: 0 auto;
+
+    @include respond-to('lg') { width: 320px; margin: 0; }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-xl);
+      object-fit: cover;
+      position: relative;
+      z-index: var(--z-raised);
+      border: 1px solid var(--color-border);
+    }
+
+    &-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: calc(var(--radius-xl) + 8px);
+      background: var(--gradient-gold);
+      opacity: 0.25;
+      z-index: var(--z-base);
+    }
+  }
+}
+
+// Timeline
+.timeline {
+  list-style: none;
+  position: relative;
+  max-width: 760px;
+  margin-inline: auto;
+
+  // Vertical line
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(80px + 10px);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--color-border-accent), transparent);
+
+    @include respond-to('md') { left: calc(90px + 12px); }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 80px 20px 1fr;
+    gap: var(--space-6);
+    align-items: flex-start;
+    padding-bottom: var(--space-10);
+
+    @include respond-to('md') { grid-template-columns: 90px 24px 1fr; }
+
+    &[data-type='education'] .timeline__dot { border-color: #60a5fa; }
+    &[data-type='achievement'] .timeline__dot { border-color: #34d399; }
+  }
+
+  &__year {
+    font-size: var(--text-sm);
+    font-family: var(--font-mono);
+    font-weight: var(--weight-semibold);
+    color: var(--color-accent);
+    text-align: right;
+    padding-top: var(--space-1);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  &__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-accent);
+    background: var(--color-bg-primary);
+    margin-top: var(--space-1);
+    box-shadow: 0 0 12px rgba(201, 168, 76, 0.4);
+    justify-self: center;
+  }
+
+  &__title {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  &__company {
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+    margin-bottom: var(--space-2);
+  }
+
+  &__desc {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 100%;
+  }
+}
