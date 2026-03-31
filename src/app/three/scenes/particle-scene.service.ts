@@ -42,6 +42,12 @@ export class ThreeSceneService {
   private readonly STAR_COUNT    = 5000;
   private isWarping = true;
 
+  // Planet
+  private planet?:      THREE.Mesh;
+  private planetAtmo?:  THREE.Mesh;
+  private planetRing?:  THREE.Mesh;
+  private planetScaleIn = 0;
+
   // Mouse / camera
   private mouseX = 0;
   private mouseY = 0;
@@ -62,6 +68,7 @@ export class ThreeSceneService {
     this.buildBloom(w, h);
     this.buildStars();
     this.buildTrails();
+    this.buildPlanet();
 
     canvas.ownerDocument.addEventListener('mousemove', this.onMouseMove);
     this.ngZone.runOutsideAngular(() => this.animate());
@@ -86,6 +93,13 @@ export class ThreeSceneService {
       if (obj instanceof THREE.Points) {
         obj.geometry?.dispose();
         (obj.material as THREE.Material)?.dispose();
+      }
+    });
+
+    [this.planet, this.planetAtmo, this.planetRing].forEach(mesh => {
+      if (mesh) {
+        mesh.geometry.dispose();
+        (mesh.material as THREE.Material).dispose();
       }
     });
 
@@ -220,7 +234,7 @@ export class ThreeSceneService {
     if (this.isWarping) {
       this.stepWarp(dt);
     } else {
-      this.stepDrift();
+      this.stepDrift(dt);
     }
 
     // Smooth mouse parallax → subtle camera tilt
@@ -273,12 +287,161 @@ export class ThreeSceneService {
     }
   }
 
-  private stepDrift(): void {
+  private stepDrift(dt: number): void {
+    // Planet scale-in after warp
+    if (this.planetScaleIn < 1) {
+      this.planetScaleIn = Math.min(1, this.planetScaleIn + dt * 0.50);
+      const s = easeOutQuart(this.planetScaleIn);
+      this.planet?.scale.setScalar(s);
+      this.planetAtmo?.scale.setScalar(s);
+      this.planetRing?.scale.setScalar(s);
+    }
+
+    // Slow planet rotation
+    if (this.planet) {
+      this.planet.rotation.y += 0.0006;
+    }
+
     // Very slow stellar drift — mimics the idle camera sway of SpaceX ISS sim
     if (this.stars) {
       this.stars.rotation.y += 0.000028;
       this.stars.rotation.x += 0.000009;
     }
+  }
+
+  // ─── Planet builders ──────────────────────────────────────────────────────
+  private buildPlanet(): void {
+    const radius = 18;
+    const geo    = new THREE.SphereGeometry(radius, 64, 64);
+    const mat    = new THREE.MeshPhongMaterial({
+      map:       this.buildPlanetTexture(),
+      shininess: 8,
+      specular:  new THREE.Color(0x1a2244),
+    });
+
+    this.planet = new THREE.Mesh(geo, mat);
+    this.planet.position.set(22, -7, -105);
+    this.planet.scale.setScalar(0);
+    this.scene!.add(this.planet);
+
+    // Sun — off to the upper-left, warm
+    const sun = new THREE.DirectionalLight(0xfff5e8, 1.5);
+    sun.position.set(-40, 30, 60);
+    this.scene!.add(sun);
+
+    // Low ambient so night side isn't pure black
+    const ambient = new THREE.AmbientLight(0x080818, 1.8);
+    this.scene!.add(ambient);
+
+    this.buildAtmosphere(radius);
+    this.buildPlanetRing(radius);
+  }
+
+  private buildAtmosphere(planetRadius: number): void {
+    if (!this.planet) return;
+    const geo = new THREE.SphereGeometry(planetRadius * 1.10, 32, 32);
+    const mat = new THREE.ShaderMaterial({
+      uniforms: {
+        glowColor: { value: new THREE.Color(0xc9a84c) },  // site gold accent
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec3 vViewDir;
+        void main() {
+          vNormal  = normalize(normalMatrix * normal);
+          vec4 mv  = modelViewMatrix * vec4(position, 1.0);
+          vViewDir = normalize(-mv.xyz);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vNormal;
+        varying vec3 vViewDir;
+        uniform vec3 glowColor;
+        void main() {
+          float f = 1.0 - max(0.0, dot(vNormal, vViewDir));
+          f = pow(f, 2.2);
+          gl_FragColor = vec4(glowColor, f * 0.68);
+        }
+      `,
+      transparent: true,
+      side:        THREE.FrontSide,
+      blending:    THREE.AdditiveBlending,
+      depthWrite:  false,
+    });
+    this.planetAtmo = new THREE.Mesh(geo, mat);
+    this.planetAtmo.position.copy(this.planet.position);
+    this.planetAtmo.scale.setScalar(0);
+    this.scene!.add(this.planetAtmo);
+  }
+
+  private buildPlanetRing(planetRadius: number): void {
+    if (!this.planet) return;
+    const geo = new THREE.RingGeometry(planetRadius * 1.42, planetRadius * 2.05, 64);
+    const mat = new THREE.MeshBasicMaterial({
+      color:       0xc9a84c,
+      transparent: true,
+      opacity:     0.09,
+      side:        THREE.DoubleSide,
+      blending:    THREE.AdditiveBlending,
+      depthWrite:  false,
+    });
+    this.planetRing = new THREE.Mesh(geo, mat);
+    this.planetRing.position.copy(this.planet.position);
+    this.planetRing.rotation.x = Math.PI * 0.36;
+    this.planetRing.rotation.z = Math.PI * 0.04;
+    this.planetRing.scale.setScalar(0);
+    this.scene!.add(this.planetRing);
+  }
+
+  private buildPlanetTexture(): THREE.CanvasTexture {
+    const S      = 256;
+    const canvas = document.createElement('canvas');
+    canvas.width = S;  canvas.height = S;
+    const ctx    = canvas.getContext('2d')!;
+    const img    = ctx.createImageData(S, S);
+    const d      = img.data;
+
+    for (let y = 0; y < S; y++) {
+      for (let x = 0; x < S; x++) {
+        const nx = x / S;
+        const ny = y / S;
+
+        // 4-octave sin-noise — cheap but sufficient for a distant sphere
+        const n =
+          Math.sin(nx *  5.1 + 0.5)  * Math.sin(ny *  3.7 + 0.9)  * 0.500 +
+          Math.sin(nx * 10.3 + 1.9)  * Math.sin(ny *  7.6 + 2.3)  * 0.250 +
+          Math.sin(nx * 20.7 + 3.1)  * Math.sin(ny * 15.2 + 4.7)  * 0.125 +
+          Math.sin(nx * 41.1 + 6.3)  * Math.sin(ny * 30.4 + 8.1)  * 0.063;
+
+        const lat    = Math.abs(ny - 0.5) * 2.0;
+        const icecap = Math.max(0, (lat - 0.78) / 0.22);
+        const i      = (y * S + x) * 4;
+
+        if (icecap > 0.05) {
+          // Polar ice — blue-white
+          const v = Math.min(255, Math.round(195 + icecap * 60));
+          d[i] = v - 10;  d[i+1] = v;  d[i+2] = Math.min(255, v + 18);  d[i+3] = 255;
+        } else if (n > 0.10) {
+          // Terrain — ochre / rust (pairs with gold accent)
+          const t = Math.min(1, (n - 0.10) / 0.50);
+          d[i]   = Math.round( 75 + t * 105);
+          d[i+1] = Math.round( 42 + t *  62);
+          d[i+2] = Math.round( 15 + t *  22);
+          d[i+3] = 255;
+        } else {
+          // Deep ocean — midnight navy
+          const dep = Math.max(0, Math.min(1, (n + 0.5) * 0.85));
+          d[i]   = Math.round( 6 + dep * 18);
+          d[i+1] = Math.round(14 + dep * 42);
+          d[i+2] = Math.round(58 + dep * 88);
+          d[i+3] = 255;
+        }
+      }
+    }
+
+    ctx.putImageData(img, 0, 0);
+    return new THREE.CanvasTexture(canvas);
   }
 
   // ─── Event handlers ────────────────────────────────────────────────────────

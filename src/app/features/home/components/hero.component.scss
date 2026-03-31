@@ -18,20 +18,20 @@
     display: block;
   }
 
-  // ── Vignette: dark wash on text side, stars still visible on right
+  // ── Vignette: heavier on far-left for text legibility, right stays open for planet
   &__overlay {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 90% 75% at 15% 65%,
-        rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 58%, transparent 100%),
+      radial-gradient(ellipse 70% 80% at 10% 60%,
+        rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.20) 55%, transparent 100%),
       linear-gradient(180deg,
-        rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.0) 40%, rgba(0, 0, 0, 0.55) 100%);
+        rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.0) 45%, rgba(0, 0, 0, 0.50) 100%);
     z-index: var(--z-base);
     pointer-events: none;
   }
 
-  // ── Main content: vertically centered, left-aligned
+  // ── Main content: left-anchored so planet shows right-of-centre
   &__content {
     position: relative;
     z-index: var(--z-raised);
@@ -41,32 +41,43 @@
     flex: 1;
     padding-top: clamp(88px, 12vh, 120px);
     padding-bottom: var(--space-24);
+    max-width: clamp(280px, 46vw, 500px);
   }
 
-  // ── Small uppercase role label
-  &__label {
+  // ── Cycling role/tech tag
+  &__tag {
     display: block;
-    font-size: clamp(0.58rem, 1vw, 0.7rem);
+    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
     font-weight: var(--weight-regular);
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.34);
-    margin-bottom: clamp(var(--space-6), 3.5vw, var(--space-10));
+    color: var(--color-accent);
+    margin-bottom: clamp(var(--space-5), 2.5vw, var(--space-8));
+
+    // Appear state (default)
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.48s ease, transform 0.48s ease;
+
+    &.is-leaving {
+      opacity: 0;
+      transform: translateY(-9px);
+    }
   }
 
-  // ── Giant editorial serif headline — the centrepiece
+  // ── Refined serif headline — compact, not display-filling
   &__headline {
     font-family: var(--font-serif);
-    font-size: var(--text-display);
+    font-size: clamp(1.75rem, 4.2vw, 3.2rem);
     font-weight: 300;
-    line-height: 0.9;
+    line-height: 1.08;
     letter-spacing: -0.02em;
     color: #ffffff;
-    margin-bottom: clamp(var(--space-10), 5vw, var(--space-16));
+    margin-bottom: clamp(var(--space-8), 3.5vw, var(--space-14));
 
     em {
       font-style: italic;
-      color: rgba(255, 255, 255, 0.58);
+      color: rgba(255, 255, 255, 0.52);
     }
   }
 
