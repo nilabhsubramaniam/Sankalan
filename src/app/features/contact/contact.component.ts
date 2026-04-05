@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { PortfolioDataService } from '../../core/services/portfolio-data.service';
+import type { ContactForm } from '../../core/models/api.models';
 
 @Component({
   selector: 'app-contact',
@@ -188,7 +189,7 @@ export class ContactComponent {
       return;
     }
     this.submitStatus.set('loading');
-    this.data.submitContact(this.form.getRawValue() as any).subscribe({
+    this.data.submitContact(this.form.getRawValue() as ContactForm).subscribe({
       next: () => {
         this.submitStatus.set('success');
         this.form.reset();

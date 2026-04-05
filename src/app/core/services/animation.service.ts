@@ -66,7 +66,7 @@ export class AnimationService {
   }
 
   /** Hero entrance animation — runs immediately */
-  heroEntrance(container: Element): void {
+  heroEntrance(_container: Element): void {
     if (!isPlatformBrowser(this.platformId)) return;
     this.ensureRegistered();
 

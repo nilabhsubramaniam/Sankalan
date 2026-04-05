@@ -1,7 +1,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  HostBinding,
   inject,
 } from '@angular/core';
 import { RouterOutlet, Router, NavigationStart, NavigationEnd } from '@angular/router';
