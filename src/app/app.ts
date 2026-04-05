@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 
 import { SeoService } from './core/services/seo.service';
@@ -12,7 +12,10 @@ import { environment } from '../environments/environment';
   selector: 'app-root',
   imports: [RouterOutlet, CursorComponent, StarWarsCrawlComponent],
   template: `
-    <app-star-wars-crawl (dismissed)="crawlDone.set(true)" />
+    <app-star-wars-crawl
+      (dismissed)="crawlDone.set(true)"
+      (naturalEnd)="onCrawlNaturalEnd()"
+    />
     <app-cursor />
     <router-outlet />
   `,
@@ -21,14 +24,20 @@ import { environment } from '../environments/environment';
 export class App implements OnInit {
   readonly crawlDone = signal(false);
 
-  private readonly seo = inject(SeoService);
-  private readonly jsonLd = inject(JsonLdService);
+  private readonly seo        = inject(SeoService);
+  private readonly jsonLd     = inject(JsonLdService);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router     = inject(Router);
 
   ngOnInit(): void {
     this.seo.initRouteListener(environment.siteUrl);
     if (isPlatformBrowser(this.platformId)) {
       this.jsonLd.injectAllDefaults();
     }
+  }
+
+  onCrawlNaturalEnd(): void {
+    // Crawl played to completion — navigate to home
+    this.router.navigate(['/']);
   }
 }

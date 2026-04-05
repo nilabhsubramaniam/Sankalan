@@ -40,17 +40,27 @@ export class AnimationService {
       targets = '.fade-in, .slide-in-left, .slide-in-right',
     } = options;
 
+    // Scope elements to the trigger element so multiple directives don't
+    // trample each other with a global selector
+    const elements: Element[] | string = trigger instanceof Element
+      ? Array.from(trigger.querySelectorAll<Element>(targets))
+      : `${trigger} ${targets}`;
+
+    if (Array.isArray(elements) && elements.length === 0) return;
+
     const from = this.getFrom(preset);
-    gsap.from(`${trigger instanceof Element ? '' : trigger} ${targets}`, {
+    gsap.from(elements, {
       ...from,
       duration: 0.8,
       delay,
       stagger,
       ease: 'power3.out',
+      immediateRender: false,   // don't hide elements before trigger fires
       scrollTrigger: {
         trigger,
         start,
         toggleActions: 'play none none none',
+        once: true,
       },
     });
   }

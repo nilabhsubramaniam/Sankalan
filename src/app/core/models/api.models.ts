@@ -32,7 +32,7 @@ export interface Project {
 export interface Skill {
   id: string;
   name: string;
-  category: 'frontend' | 'backend' | 'devops' | 'tools' | 'other';
+  category: 'frontend' | 'backend' | 'devops' | 'tools' | 'ai' | 'other';
   icon: string;
   level: number; // 1–100
   featured: boolean;
@@ -52,6 +52,25 @@ export interface ContactForm {
   email: string;
   subject: string;
   message: string;
+}
+
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  year: string;
+  url: string;
+  badge: string;
+}
+
+export interface Hackathon {
+  id: string;
+  name: string;
+  event: string;
+  description: string;
+  techStack: string[];
+  repoUrl: string;
+  year: string;
 }
 
 export interface SeoMeta {

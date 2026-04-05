@@ -296,16 +296,21 @@ import { isPlatformBrowser } from '@angular/common';
   `],
 })
 export class StarWarsCrawlComponent implements OnInit, OnDestroy {
-  @Output() dismissed = new EventEmitter<void>();
+  @Output() dismissed   = new EventEmitter<void>();
+  @Output() naturalEnd  = new EventEmitter<void>();
 
   protected readonly visible    = signal(false);
   protected readonly fadingOut  = signal(false);
 
   private readonly platformId   = inject(PLATFORM_ID);
-  private dismissTimer?: ReturnType<typeof setTimeout>;
+  private dismissTimer?:    ReturnType<typeof setTimeout>;
+  private contentEndTimer?: ReturnType<typeof setTimeout>;
+  private wasSkipped = false;
 
-  // Total animation length in ms: 11s delay + 52s crawl + 1.5s buffer
-  private readonly TOTAL_MS = (11 + 52 + 1.5) * 1000;
+  // Crawl content ends at 11s (stage delay) + 52s (scroll) = 63s
+  private readonly CONTENT_END_MS = (11 + 52) * 1000;
+  // Auto-dismiss after content + 1s buffer (cleans up overlay)
+  private readonly TOTAL_MS       = this.CONTENT_END_MS + 1000;
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -317,10 +322,17 @@ export class StarWarsCrawlComponent implements OnInit, OnDestroy {
 
     this.visible.set(true);
 
+    // Redirect the moment crawl content finishes (not skipped)
+    this.contentEndTimer = setTimeout(() => {
+      if (!this.wasSkipped) this.naturalEnd.emit();
+    }, this.CONTENT_END_MS);
+
+    // Auto-dismiss overlay shortly after
     this.dismissTimer = setTimeout(() => this.dismiss(), this.TOTAL_MS);
   }
 
   skip(): void {
+    this.wasSkipped = true;
     this.dismiss();
   }
 
@@ -331,10 +343,12 @@ export class StarWarsCrawlComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.visible.set(false);
       this.dismissed.emit();
+      // naturalEnd already fired via contentEndTimer if not skipped
     }, 1200);
   }
 
   ngOnDestroy(): void {
     clearTimeout(this.dismissTimer);
+    clearTimeout(this.contentEndTimer);
   }
 }

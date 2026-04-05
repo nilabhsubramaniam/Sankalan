@@ -19,7 +19,7 @@ export class JsonLdService {
     ],
     jobTitle: 'Full-Stack Developer',
     description: 'Full-stack developer specialising in Angular, TypeScript, and Go.',
-    knowsAbout: ['Angular', 'TypeScript', 'Go', 'Three.js', 'Node.js'],
+    knowsAbout: ['Angular', 'TypeScript', 'Go', 'Three.js', 'Python', 'AI/LLM integration with Ollama and LangChain'],
   };
 
   private readonly webSiteSchema = {

@@ -10,6 +10,7 @@ export interface ParticleSceneOptions {
   canvas: HTMLCanvasElement;
   particleCount?: number;
   accentColor?: number;
+  hideSun?: boolean;
 }
 
 // Easing: easeOutQuart — fast rush then smooth deceleration (warp feel)
@@ -100,6 +101,9 @@ export class ThreeSceneService {
   private cometInterval = 7 + Math.random() * 4;  // randomised interval
   private cometMaterial?: THREE.ShaderMaterial;
 
+  // Sun visibility flag
+  private showSun = true;
+
   // Mouse / camera
   private mouseX = 0;
   private mouseY = 0;
@@ -131,9 +135,10 @@ export class ThreeSceneService {
     this.buildCamera(w, h);
     this.buildRenderer(canvas, w, h);
     this.buildBloom(w, h);
+    this.showSun = !(options.hideSun ?? false);
     this.buildStars();
     this.buildTrails();
-    this.buildSun();
+    if (this.showSun) this.buildSun();
 
     canvas.ownerDocument.addEventListener('mousemove', this.onMouseMove);
     this.ngZone.runOutsideAngular(() => this.animate());
@@ -375,35 +380,36 @@ export class ThreeSceneService {
   }
 
   private stepDrift(dt: number): void {
-    // Sun scale-in after warp
-    if (this.sunScaleIn < 1) {
-      this.sunScaleIn = Math.min(1, this.sunScaleIn + dt * 0.42);
-      const s = easeOutQuart(this.sunScaleIn);
-      this.sun?.scale.setScalar(s);
-      this.sunCorona?.scale.setScalar(s);
-      this.sunCorona2?.scale.setScalar(s);
-      if (this.solarWind) this.solarWind.visible = this.sunScaleIn > 0.3;
-    }
+    if (this.showSun) {
+      // Sun scale-in after warp
+      if (this.sunScaleIn < 1) {
+        this.sunScaleIn = Math.min(1, this.sunScaleIn + dt * 0.42);
+        const s = easeOutQuart(this.sunScaleIn);
+        this.sun?.scale.setScalar(s);
+        this.sunCorona?.scale.setScalar(s);
+        this.sunCorona2?.scale.setScalar(s);
+        if (this.solarWind) this.solarWind.visible = this.sunScaleIn > 0.3;
+      }
 
-    // Billboard sun toward camera every frame — keeps it a perfect circle
-    // regardless of how far off-axis SUN_POS is
-    if (this.camera) {
-      this.sun?.lookAt(this.camera.position);
-      this.sunCorona?.lookAt(this.camera.position);
-      this.sunCorona2?.lookAt(this.camera.position);
-    }
+      // Billboard sun toward camera every frame
+      if (this.camera) {
+        this.sun?.lookAt(this.camera.position);
+        this.sunCorona?.lookAt(this.camera.position);
+        this.sunCorona2?.lookAt(this.camera.position);
+      }
 
-    // Solar flare system
-    this.flareTimer += dt;
-    if (this.flareTimer >= this.flareInterval && this.flares.length < this.MAX_FLARES) {
-      this.flareTimer    = 0;
-      this.flareInterval = 1.8 + Math.random() * 2.4;
-      this.spawnFlare();
-    }
-    this.updateFlares(dt);
+      // Solar flare system
+      this.flareTimer += dt;
+      if (this.flareTimer >= this.flareInterval && this.flares.length < this.MAX_FLARES) {
+        this.flareTimer    = 0;
+        this.flareInterval = 1.8 + Math.random() * 2.4;
+        this.spawnFlare();
+      }
+      this.updateFlares(dt);
 
-    // Solar wind drift
-    this.updateSolarWind(dt);
+      // Solar wind drift
+      this.updateSolarWind(dt);
+    }
 
     // Comet system
     this.cometTimer += dt;
