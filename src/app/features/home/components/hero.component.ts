@@ -8,7 +8,6 @@ import {
   inject,
   PLATFORM_ID,
   HostListener,
-  signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
@@ -26,11 +25,6 @@ import { AnimationService } from '../../../core/services/animation.service';
       <div class="hero__overlay" aria-hidden="true"></div>
 
       <div class="hero__content container">
-
-        <!-- Cycling phrase tag -->
-        <p class="hero__tag" [class.is-leaving]="phraseOut()">
-          {{ phrases[phraseIndex()] }}
-        </p>
 
         <h1 class="hero__headline">
           Crafting interfaces<br /><em>worth experiencing.</em>
@@ -68,33 +62,10 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   private readonly animService = inject(AnimationService);
   private readonly platformId  = inject(PLATFORM_ID);
 
-  // ── Cycling phrase ──────────────────────────────────────────────
-  readonly phrases = [
-    'Full-Stack Developer',
-    'Angular · TypeScript',
-    'Three.js · WebGL',
-    'Go · REST APIs',
-  ] as const;
-
-  readonly phraseIndex = signal(0);
-  readonly phraseOut   = signal(false);
-
-  private phraseTimer?: ReturnType<typeof setInterval>;
-
-  private cyclePhrase(): void {
-    this.phraseOut.set(true);
-    setTimeout(() => {
-      this.phraseIndex.update(i => (i + 1) % this.phrases.length);
-      this.phraseOut.set(false);
-    }, 520);
-  }
-
-  // ─────────────────────────────────────────────────────────────────
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.threeScene.init({ canvas: this.canvasRef.nativeElement });
       this.animService.heroEntrance(this.canvasRef.nativeElement.parentElement!);
-      this.phraseTimer = setInterval(() => this.cyclePhrase(), 3600);
     }
   }
 
@@ -107,7 +78,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.phraseTimer);
     this.threeScene.destroy();
   }
 }

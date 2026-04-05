@@ -18,15 +18,15 @@
     display: block;
   }
 
-  // ── Vignette: heavier on far-left for text legibility, right stays open for planet
+  // ── Vignette: subtle scrim around text, lets sun glow bleed through elsewhere
   &__overlay {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 70% 80% at 10% 60%,
-        rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.20) 55%, transparent 100%),
+      radial-gradient(ellipse 55% 50% at 16% 42%,
+        rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.28) 55%, transparent 100%),
       linear-gradient(180deg,
-        rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.0) 45%, rgba(0, 0, 0, 0.50) 100%);
+        rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.0) 40%, rgba(0, 0, 0, 0.50) 100%);
     z-index: var(--z-base);
     pointer-events: none;
   }
@@ -44,40 +44,34 @@
     max-width: clamp(280px, 46vw, 500px);
   }
 
-  // ── Cycling role/tech tag
-  &__tag {
-    display: block;
-    font-size: clamp(0.58rem, 0.9vw, 0.68rem);
-    font-weight: var(--weight-regular);
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: clamp(var(--space-5), 2.5vw, var(--space-8));
-
-    // Appear state (default)
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.48s ease, transform 0.48s ease;
-
-    &.is-leaving {
-      opacity: 0;
-      transform: translateY(-9px);
-    }
-  }
-
-  // ── Refined serif headline — compact, not display-filling
+  // ── Refined serif headline — gradient text picks up the sun palette
   &__headline {
     font-family: var(--font-serif);
     font-size: clamp(1.75rem, 4.2vw, 3.2rem);
     font-weight: 300;
-    line-height: 1.08;
+    line-height: 1.12;
     letter-spacing: -0.02em;
+    // Cool white → warm cream gradient top-to-bottom mimics sun backlighting
+    background: linear-gradient(175deg, #ffffff 0%, #ffe9c8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    // Fallback for any browser that doesn't support background-clip: text
     color: #ffffff;
+    filter: drop-shadow(0 2px 18px rgba(0, 0, 0, 0.80))
+            drop-shadow(0 1px 5px rgba(0, 0, 0, 0.55));
     margin-bottom: clamp(var(--space-8), 3.5vw, var(--space-14));
 
     em {
       font-style: italic;
-      color: rgba(255, 255, 255, 0.52);
+      font-weight: 400;
+      // Sun-gold shimmer — as if the solar glow illuminates this word directly
+      background: linear-gradient(118deg, #ffd97a 0%, #ffcc44 40%, #fff3c0 70%, #ffcc44 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 14px rgba(255, 184, 50, 0.55))
+              drop-shadow(0 2px 8px rgba(0, 0, 0, 0.65));
     }
   }
 
