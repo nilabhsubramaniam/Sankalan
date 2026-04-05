@@ -50,10 +50,11 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
                 context-aware applications.
               </p>
               <div class="about__meta-row">
-                <span class="about__meta-chip">📍 Gurugram, Haryana</span>
-                <span class="about__meta-chip">📞 +91 9158364522</span>
-                <span class="about__meta-chip">🎓 B.Tech — NMIMS Mumbai</span>
-                <span class="about__meta-chip">🌐 English · Hindi · Maithili</span>
+                <span class="about__meta-chip"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Gurugram, Haryana</span>
+                <span class="about__meta-chip"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 9158364522</span>
+                <span class="about__meta-chip"><i class="fa-solid fa-envelope" aria-hidden="true"></i> nilabhsubramaniam@gmail.com</span>
+                <span class="about__meta-chip"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> B.Tech — NMIMS Mumbai</span>
+                <span class="about__meta-chip"><i class="fa-solid fa-language" aria-hidden="true"></i> English · Hindi · Maithili</span>
               </div>
             </div>
           </div>
@@ -326,16 +327,16 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
                 <i class="fa-solid fa-house" aria-hidden="true"></i>
                 <div>
                   <p class="location-card__type">Permanent</p>
-                  <h3 class="location-card__city">Patna, Bihar</h3>
+                  <h3 class="location-card__city">Madhubani, Bihar</h3>
                 </div>
               </div>
               <div class="location-card__map">
                 <iframe
-                  title="Patna location map"
-                  src="https://maps.google.com/maps?q=Patna,Bihar,India&z=13&output=embed&hl=en"
+                  title="Madhubani location map"
+                  src="https://maps.google.com/maps?q=Madhubani,Bihar,India&z=13&output=embed&hl=en"
                   width="100%" height="220" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
-                  aria-label="Map showing Patna, Bihar">
+                  aria-label="Map showing Madhubani, Bihar">
                 </iframe>
               </div>
             </div>

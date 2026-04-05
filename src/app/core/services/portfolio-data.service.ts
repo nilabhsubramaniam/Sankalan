@@ -32,23 +32,25 @@ const MOCK_PROJECTS: Project[] = [
 
 const MOCK_SKILLS: Skill[] = [
   // Frontend
-  { id: '1',  name: 'Angular',       category: 'frontend', icon: 'fa-brands fa-angular',       years: 8,  featured: true  },
-  { id: '2',  name: 'TypeScript',    category: 'frontend', icon: 'fa-brands fa-js',             years: 8,  featured: true  },
-  { id: '3',  name: 'Three.js',      category: 'frontend', icon: 'fa-solid fa-cube',            years: 2,  featured: true  },
-  { id: '4',  name: 'SCSS / CSS',    category: 'frontend', icon: 'fa-brands fa-sass',           years: 8,  featured: false },
-  { id: '5',  name: 'JavaScript',    category: 'frontend', icon: 'fa-brands fa-square-js',      years: 8,  featured: false },
+  { id: '1',  name: 'Angular',           category: 'frontend', icon: 'fa-brands fa-angular',       years: 8,  featured: true  },
+  { id: '2',  name: 'TypeScript',        category: 'frontend', icon: 'fa-brands fa-js',             years: 6,  featured: true  },
+  { id: '3',  name: 'Three.js',          category: 'frontend', icon: 'fa-solid fa-cube',            years: 1,  featured: true  },
+  { id: '4',  name: 'SCSS / CSS',        category: 'frontend', icon: 'fa-brands fa-sass',           years: 8,  featured: false },
+  { id: '5',  name: 'JavaScript',        category: 'frontend', icon: 'fa-brands fa-square-js',      years: 8,  featured: false },
+  { id: '16', name: 'Bootstrap',         category: 'frontend', icon: 'fa-brands fa-bootstrap',      years: 7,  featured: false },
+  { id: '17', name: 'Angular Material',  category: 'frontend', icon: 'fa-solid fa-palette',         years: 6,  featured: false },
   // Backend
-  { id: '6',  name: 'Go',            category: 'backend',  icon: 'fa-solid fa-server',          years: 3,  featured: true  },
-  { id: '7',  name: 'FastAPI',       category: 'backend',  icon: 'fa-solid fa-bolt',            years: 2,  featured: true  },
-  { id: '8',  name: 'Python',        category: 'backend',  icon: 'fa-brands fa-python',         years: 3,  featured: true  },
-  { id: '9',  name: 'PostgreSQL',    category: 'backend',  icon: 'fa-solid fa-database',        years: 3,  featured: false },
+  { id: '6',  name: 'Go',            category: 'backend',  icon: 'fa-solid fa-server',          years: 1,  featured: true  },
+  { id: '7',  name: 'FastAPI',       category: 'backend',  icon: 'fa-solid fa-bolt',            years: 1,  featured: true  },
+  { id: '8',  name: 'Python',        category: 'backend',  icon: 'fa-brands fa-python',         years: 1,  featured: true  },
+  { id: '9',  name: 'PostgreSQL',    category: 'backend',  icon: 'fa-solid fa-database',        years: 1,  featured: false },
   // AI / LLM
   { id: '10', name: 'Ollama (LLM)',  category: 'ai',       icon: 'fa-solid fa-brain',           years: 1,  featured: true  },
   { id: '11', name: 'LangChain',     category: 'ai',       icon: 'fa-solid fa-link',            years: 1,  featured: false },
   { id: '12', name: 'Vector DB',     category: 'ai',       icon: 'fa-solid fa-magnifying-glass', years: 1,  featured: true  },
   // DevOps / Tools
-  { id: '13', name: 'Docker',        category: 'devops',   icon: 'fa-brands fa-docker',         years: 3,  featured: false },
-  { id: '14', name: 'NGINX',         category: 'devops',   icon: 'fa-solid fa-shield-halved',   years: 3,  featured: false },
+  { id: '13', name: 'Docker',        category: 'devops',   icon: 'fa-brands fa-docker',         years: 1,  featured: false },
+  { id: '14', name: 'NGINX',         category: 'devops',   icon: 'fa-solid fa-shield-halved',   years: 1,  featured: false },
   { id: '15', name: 'Git',           category: 'devops',   icon: 'fa-brands fa-git-alt',        years: 8,  featured: false },
 ];
 
