@@ -34,7 +34,7 @@ export interface Skill {
   name: string;
   category: 'frontend' | 'backend' | 'devops' | 'tools' | 'ai' | 'other';
   icon: string;
-  level: number; // 1–100
+  years: number; // years of experience
   featured: boolean;
 }
 

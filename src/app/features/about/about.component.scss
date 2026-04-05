@@ -1,5 +1,218 @@
 @use '../../../styles/base/mixins' as *;
 
+// ─── Hobbies ──────────────────────────────────────────────────
+.hobbies-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.hobby-block {
+  &__title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+    margin-bottom: var(--space-5);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    i { color: var(--color-accent); }
+  }
+}
+
+// Filter chips
+.travel-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.travel-filter-chip {
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  &--active {
+    background: rgba(201, 168, 76, 0.15);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    font-weight: var(--weight-semibold);
+  }
+}
+
+// Travel photo grid
+.travel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+
+  @include respond-to('sm') { grid-template-columns: repeat(3, 1fr); }
+  @include respond-to('md') { grid-template-columns: repeat(4, 1fr); }
+  @include respond-to('lg') { grid-template-columns: repeat(5, 1fr); }
+}
+
+.travel-card {
+  margin: 0;
+
+  &__frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    i {
+      font-size: var(--text-2xl);
+      color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &__caption {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    i { color: var(--color-accent); font-size: 0.6rem; }
+  }
+}
+
+// Gaming chips
+.game-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.game-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  background: rgba(201, 168, 76, 0.06);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  i { color: var(--color-accent); }
+}
+
+// Outdoor / Fitness cards
+.outdoor-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.outdoor-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-8);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+  min-width: 110px;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+    background: rgba(201, 168, 76, 0.05);
+  }
+
+  &__icon {
+    font-size: var(--text-2xl);
+    color: var(--color-accent);
+  }
+
+  span {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+  }
+}
+
+// ─── Location maps ────────────────────────────────────────────
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+
+  @include respond-to('md') { grid-template-columns: 1fr 1fr; }
+}
+
+.location-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    background: rgba(255, 255, 255, 0.03);
+
+    > i {
+      font-size: var(--text-xl);
+      color: var(--color-accent);
+      flex-shrink: 0;
+    }
+  }
+
+  &__type {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+  }
+
+  &__city {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  &__map {
+    iframe {
+      display: block;
+      filter: grayscale(0.25) brightness(0.9);
+      border: 0;
+    }
+  }
+}
+
 // ─── Page wrapper with starfield background ───────────────────
 .about-page {
   position: relative;
@@ -25,10 +238,10 @@
 
 // ─── Tighten section spacing for this page ─────────────────
 .about .section {
-  padding-block: var(--space-10);
+  padding-block: var(--space-12);
 
   @include respond-to('lg') {
-    padding-block: var(--space-14);
+    padding-block: var(--space-16);
   }
 }
 
@@ -155,42 +368,60 @@
 }
 
 .skill-pill {
-  display: grid;
-  grid-template-columns: 120px 1fr 36px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: rgba(201, 168, 76, 0.3);
+    background: rgba(201, 168, 76, 0.05);
+  }
+
+  &__icon {
+    font-size: var(--text-sm);
+    width: 1rem;
+    text-align: center;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
 
   &__name {
+    flex: 1;
     font-size: var(--text-sm);
     font-weight: var(--weight-medium);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
-  &__bar {
-    height: 4px;
-    border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.07);
-    overflow: hidden;
-  }
-
-  &__fill {
-    height: 100%;
-    border-radius: var(--radius-full);
-    background: linear-gradient(90deg, var(--color-accent), #fff0a0);
-    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &--ai .skill-pill__fill {
-    background: linear-gradient(90deg, #7c3aed, #a78bfa);
-  }
-
-  &__level {
+  &__years {
     font-size: 0.65rem;
     font-family: var(--font-mono);
-    color: var(--color-text-secondary);
-    text-align: right;
+    font-weight: var(--weight-semibold);
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: var(--radius-full);
+    padding: 2px var(--space-2);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &--ai {
+    &:hover {
+      border-color: rgba(167, 139, 250, 0.3);
+      background: rgba(124, 58, 237, 0.05);
+    }
+
+    .skill-pill__icon { color: #a78bfa; }
+
+    .skill-pill__years {
+      color: #a78bfa;
+      background: rgba(124, 58, 237, 0.12);
+    }
   }
 }
 

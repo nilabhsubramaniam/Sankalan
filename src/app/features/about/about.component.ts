@@ -7,6 +7,8 @@ import {
   ViewChild,
   HostListener,
   inject,
+  signal,
+  computed,
   PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -38,9 +40,9 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
                 Hi, I'm <span class="text-gradient">Nilabh Subramaniam</span>
               </h1>
               <p class="about__desc">
-                A Full-Stack Engineer with <strong>8.5+ years</strong> of experience building
+                A Frontend Engineer with <strong>8.5+ years</strong> of experience building
                 scalable, high-performance web applications. I specialise in Angular, TypeScript,
-                and Go — shipping products that are fast, accessible, and maintainable.
+                and SCSS — shipping products that are fast, accessible, and maintainable.
               </p>
               <p class="about__desc">
                 Beyond the frontend, I actively explore AI/ML — working with LLMs via Ollama,
@@ -49,7 +51,7 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
               </p>
               <div class="about__meta-row">
                 <span class="about__meta-chip">📍 Gurugram, Haryana</span>
-                <span class="about__meta-chip">📞 +91 XXXXX XXXXX</span>
+                <span class="about__meta-chip">📞 +91 9158364522</span>
                 <span class="about__meta-chip">🎓 B.Tech — NMIMS Mumbai</span>
                 <span class="about__meta-chip">🌐 English · Hindi · Maithili</span>
               </div>
@@ -72,11 +74,9 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
               <ul class="skill-list">
                 @for (s of frontendSkills(); track s.id) {
                   <li class="skill-pill">
+                    <i class="skill-pill__icon {{ s.icon }}" aria-hidden="true"></i>
                     <span class="skill-pill__name">{{ s.name }}</span>
-                    <div class="skill-pill__bar">
-                      <div class="skill-pill__fill" [style.width.%]="s.level"></div>
-                    </div>
-                    <span class="skill-pill__level">{{ s.level }}%</span>
+                    <span class="skill-pill__years">{{ s.years }} yr{{ s.years === 1 ? '' : 's' }}</span>
                   </li>
                 }
               </ul>
@@ -87,11 +87,9 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
               <ul class="skill-list">
                 @for (s of backendSkills(); track s.id) {
                   <li class="skill-pill">
+                    <i class="skill-pill__icon {{ s.icon }}" aria-hidden="true"></i>
                     <span class="skill-pill__name">{{ s.name }}</span>
-                    <div class="skill-pill__bar">
-                      <div class="skill-pill__fill" [style.width.%]="s.level"></div>
-                    </div>
-                    <span class="skill-pill__level">{{ s.level }}%</span>
+                    <span class="skill-pill__years">{{ s.years }} yr{{ s.years === 1 ? '' : 's' }}</span>
                   </li>
                 }
               </ul>
@@ -102,11 +100,9 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
               <ul class="skill-list">
                 @for (s of aiSkills(); track s.id) {
                   <li class="skill-pill skill-pill--ai">
+                    <i class="skill-pill__icon {{ s.icon }}" aria-hidden="true"></i>
                     <span class="skill-pill__name">{{ s.name }}</span>
-                    <div class="skill-pill__bar">
-                      <div class="skill-pill__fill" [style.width.%]="s.level"></div>
-                    </div>
-                    <span class="skill-pill__level">{{ s.level }}%</span>
+                    <span class="skill-pill__years">{{ s.years }} yr{{ s.years === 1 ? '' : 's' }}</span>
                   </li>
                 }
               </ul>
@@ -208,6 +204,146 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
         </div>
       </section>
 
+      <!-- ── Hobbies ──────────────────────────────────────────── -->
+      <section class="section" aria-labelledby="hobbies-heading">
+        <div class="container">
+          <header class="section__header">
+            <span class="section__label">Beyond Code</span>
+            <h2 id="hobbies-heading" class="section__title">Hobbies &amp; Interests</h2>
+          </header>
+
+          <div class="hobbies-wrapper">
+
+            <!-- Travelling -->
+            <div class="hobby-block">
+              <h3 class="hobby-block__title">
+                <i class="fa-solid fa-plane-departure" aria-hidden="true"></i> Travelling
+              </h3>
+
+              <!-- Filter chips -->
+              <div class="travel-filters" role="group" aria-label="Filter by state">
+                @for (state of travelStates; track state) {
+                  <button
+                    class="travel-filter-chip"
+                    [class.travel-filter-chip--active]="travelFilter() === state"
+                    (click)="setTravelFilter(state)"
+                    [attr.aria-pressed]="travelFilter() === state"
+                  >{{ state }}</button>
+                }
+              </div>
+
+              <div class="travel-grid">
+                @for (photo of filteredTravelPhotos(); track photo.id) {
+                  <figure class="travel-card">
+                    <div class="travel-card__frame">
+                      <img
+                        [src]="photo.src"
+                        [alt]="photo.label"
+                        class="travel-card__img"
+                        loading="lazy"
+                        (error)="onTravelImgError($event)"
+                      />
+                      <div class="travel-card__placeholder" aria-hidden="true">
+                        <i class="fa-solid fa-camera"></i>
+                      </div>
+                    </div>
+                    <figcaption class="travel-card__caption">
+                      <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                      {{ photo.label }}
+                    </figcaption>
+                  </figure>
+                }
+              </div>
+            </div>
+
+            <!-- Gaming -->
+            <div class="hobby-block">
+              <h3 class="hobby-block__title">
+                <i class="fa-solid fa-gamepad" aria-hidden="true"></i> Gaming
+              </h3>
+              <ul class="game-list">
+                <li class="game-chip"><i class="fa-solid fa-crosshairs" aria-hidden="true"></i> Halo</li>
+                <li class="game-chip"><i class="fa-solid fa-dungeon" aria-hidden="true"></i> Enter the Gungeon</li>
+                <li class="game-chip"><i class="fa-brands fa-jedi-order" aria-hidden="true"></i> Star Wars</li>
+              </ul>
+            </div>
+
+            <!-- Outdoor & Fitness -->
+            <div class="hobby-block">
+              <h3 class="hobby-block__title">
+                <i class="fa-solid fa-person-running" aria-hidden="true"></i> Outdoor &amp; Fitness
+              </h3>
+              <ul class="outdoor-list">
+                <li class="outdoor-card">
+                  <i class="fa-solid fa-table-tennis-paddle-ball outdoor-card__icon" aria-hidden="true"></i>
+                  <span>Badminton</span>
+                </li>
+                <li class="outdoor-card">
+                  <i class="fa-solid fa-bicycle outdoor-card__icon" aria-hidden="true"></i>
+                  <span>Cycling</span>
+                </li>
+                <li class="outdoor-card">
+                  <i class="fa-solid fa-dumbbell outdoor-card__icon" aria-hidden="true"></i>
+                  <span>Gym &amp; Workout</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Location ─────────────────────────────────────────── -->
+      <section class="section" aria-labelledby="location-heading">
+        <div class="container">
+          <header class="section__header">
+            <span class="section__label">Where I Am</span>
+            <h2 id="location-heading" class="section__title">Location</h2>
+          </header>
+          <div class="location-grid">
+
+            <div class="location-card">
+              <div class="location-card__header">
+                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                <div>
+                  <p class="location-card__type">Correspondence</p>
+                  <h3 class="location-card__city">Gurugram, Haryana</h3>
+                </div>
+              </div>
+              <div class="location-card__map">
+                <iframe
+                  title="Gurugram location map"
+                  src="https://maps.google.com/maps?q=Gurugram,Haryana,India&z=13&output=embed&hl=en"
+                  width="100%" height="220" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  aria-label="Map showing Gurugram, Haryana">
+                </iframe>
+              </div>
+            </div>
+
+            <div class="location-card">
+              <div class="location-card__header">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                <div>
+                  <p class="location-card__type">Permanent</p>
+                  <h3 class="location-card__city">Patna, Bihar</h3>
+                </div>
+              </div>
+              <div class="location-card__map">
+                <iframe
+                  title="Patna location map"
+                  src="https://maps.google.com/maps?q=Patna,Bihar,India&z=13&output=embed&hl=en"
+                  width="100%" height="220" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  aria-label="Map showing Patna, Bihar">
+                </iframe>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </article>
     </div>
   `,
@@ -229,6 +365,66 @@ export class AboutComponent implements AfterViewInit, OnDestroy {
   readonly frontendSkills = () => this.allSkills().filter(s => s.category === 'frontend');
   readonly backendSkills  = () => this.allSkills().filter(s => s.category === 'backend' || s.category === 'devops');
   readonly aiSkills       = () => this.allSkills().filter(s => s.category === 'ai');
+
+  private readonly travelFallbackSrc = '/assets/hobbies/travel-4.jpg';
+
+  readonly travelStates = ['All', 'Bihar', 'Gujarat', 'Himachal Pradesh', 'Kerala'] as const;
+  readonly travelFilter  = signal<string>('All');
+
+  readonly travelPhotos = [
+    // Bihar
+    { id:  1, src: '/assets/hobbies/Travel-Bihar.JPG',               label: 'Bihar'            },
+    { id:  2, src: '/assets/hobbies/Travel-Bihar-2.jpeg',            label: 'Bihar'            },
+    { id:  3, src: '/assets/hobbies/Travel-Bihar-3.jpeg',            label: 'Bihar'            },
+    { id:  4, src: '/assets/hobbies/Travel-Bihar-4.jpg',             label: 'Bihar'            },
+    // Gujarat
+    { id:  5, src: '/assets/hobbies/Travel-Gujrat.jpeg',             label: 'Gujarat'          },
+    { id:  6, src: '/assets/hobbies/Travel-Gujrat-1.jpeg',           label: 'Gujarat'          },
+    { id:  7, src: '/assets/hobbies/Travel-Gujrat-2.jpeg',           label: 'Gujarat'          },
+    { id:  8, src: '/assets/hobbies/Travel-Gujrat-3.jpeg',           label: 'Gujarat'          },
+    { id:  9, src: '/assets/hobbies/Travel-Gujrat-4.jpeg',           label: 'Gujarat'          },
+    { id: 10, src: '/assets/hobbies/Travel-Gujrat-5.jpeg',           label: 'Gujarat'          },
+    { id: 11, src: '/assets/hobbies/Travel-Gujrat-6.jpeg',           label: 'Gujarat'          },
+    { id: 12, src: '/assets/hobbies/Travel-Gujrat-7.jpeg',           label: 'Gujarat'          },
+    { id: 13, src: '/assets/hobbies/Travel-Gujrat-8.jpeg',           label: 'Gujarat'          },
+    { id: 14, src: '/assets/hobbies/Travel-Gujrat-9.jpeg',           label: 'Gujarat'          },
+    { id: 15, src: '/assets/hobbies/Travel-Gujrat-10.jpeg',          label: 'Gujarat'          },
+    { id: 16, src: '/assets/hobbies/Travel-Gujrat-11.jpeg',          label: 'Gujarat'          },
+    { id: 17, src: '/assets/hobbies/Travel-Gujrat-12.jpeg',          label: 'Gujarat'          },
+    { id: 18, src: '/assets/hobbies/Travel-Gujrat-13.jpeg',          label: 'Gujarat'          },
+    { id: 19, src: '/assets/hobbies/Travel-Gujrat-14.jpeg',          label: 'Gujarat'          },
+    { id: 20, src: '/assets/hobbies/Travel-Gujrat-15.jpeg',          label: 'Gujarat'          },
+    // Himachal Pradesh
+    { id: 21, src: '/assets/hobbies/Travel-HimachalPradesh.jpeg',    label: 'Himachal Pradesh' },
+    { id: 22, src: '/assets/hobbies/Travel-Himachal-pradesh-2.jpeg', label: 'Himachal Pradesh' },
+    { id: 23, src: '/assets/hobbies/Travel-Himachal-Pradesh-3.jpeg', label: 'Himachal Pradesh' },
+    { id: 24, src: '/assets/hobbies/Travel-Himachal-Pradesh-4.jpeg', label: 'Himachal Pradesh' },
+    { id: 25, src: '/assets/hobbies/Travel-Himachal-Pradesh-5.jpeg', label: 'Himachal Pradesh' },
+    { id: 26, src: '/assets/hobbies/Travel-Himachal-Pradesh-6.jpeg', label: 'Himachal Pradesh' },
+    { id: 27, src: '/assets/hobbies/Travel-Himachal-Pradesh-7.jpeg', label: 'Himachal Pradesh' },
+    // Kerala
+    { id: 28, src: '/assets/hobbies/Travel-Kerla.jpeg',              label: 'Kerala'           },
+    { id: 29, src: '/assets/hobbies/Travel-Kerla-1.jpeg',            label: 'Kerala'           },
+    { id: 30, src: '/assets/hobbies/Travel-Kerla-2.jpeg',            label: 'Kerala'           },
+    { id: 31, src: '/assets/hobbies/Travel-Kerla-3.jpeg',            label: 'Kerala'           },
+    { id: 32, src: '/assets/hobbies/Travel-Kerla-4.jpeg',            label: 'Kerala'           },
+  ];
+
+  readonly filteredTravelPhotos = computed(() => {
+    const f = this.travelFilter();
+    return f === 'All' ? this.travelPhotos : this.travelPhotos.filter(p => p.label === f);
+  });
+
+  setTravelFilter(state: string): void {
+    this.travelFilter.set(state);
+  }
+
+  onTravelImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (img.src !== this.travelFallbackSrc) {
+      img.src = this.travelFallbackSrc;
+    }
+  }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
