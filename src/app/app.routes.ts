@@ -46,18 +46,6 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'skills',
-        loadComponent: () =>
-          import('./features/skills/skills.component').then((m) => m.SkillsComponent),
-        title: 'Skills — Sankalan',
-        data: {
-          meta: {
-            description: 'Technical skills, tools, and technologies I specialise in.',
-            ogImage: '/assets/og-skills.jpg',
-          },
-        },
-      },
-      {
         path: 'contact',
         loadComponent: () =>
           import('./features/contact/contact.component').then(

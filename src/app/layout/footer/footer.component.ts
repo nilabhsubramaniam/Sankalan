@@ -53,7 +53,6 @@ export class FooterComponent {
   readonly links = [
     { label: 'About',    path: '/about'   },
     { label: 'Projects', path: '/projects'},
-    { label: 'Skills',   path: '/skills'  },
     { label: 'Contact',  path: '/contact' },
   ];
 

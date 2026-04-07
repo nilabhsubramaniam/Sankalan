@@ -1,11 +1,19 @@
 import {
   Component,
   ChangeDetectionStrategy,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+  ViewChild,
+  HostListener,
   inject,
   signal,
   computed,
+  PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
 
 import { PortfolioDataService } from '../../core/services/portfolio-data.service';
 import type { Skill } from '../../core/models/api.models';
@@ -18,6 +26,11 @@ type SkillCategory = Skill['category'] | 'all';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   template: `
+    <div class="skills-page">
+      <!-- Starfield background (same as About/Projects, sun hidden) -->
+      <canvas #bgCanvas class="skills-page__canvas" aria-hidden="true" role="presentation"></canvas>
+      <div class="skills-page__overlay" aria-hidden="true"></div>
+
     <section class="section skills" aria-labelledby="skills-heading">
       <div class="container">
         <header class="section__header">
@@ -72,10 +85,15 @@ type SkillCategory = Skill['category'] | 'all';
         </ul>
       </div>
     </section>
+    </div>
   `,
   styleUrl: './skills.component.scss',
 })
-export class SkillsComponent {
+export class SkillsComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('bgCanvas') private canvasRef!: ElementRef<HTMLCanvasElement>;
+
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly threeScene = inject(ThreeSceneService);
   private readonly data = inject(PortfolioDataService);
   readonly skills = toSignal(this.data.getSkills(), { initialValue: [] });
   readonly activeCategory = signal<SkillCategory>('all');
@@ -98,4 +116,22 @@ export class SkillsComponent {
 
   /** Convert years of experience to a 0–100 bar width (capped at 10 yrs = 100 %) */
   proficiencyPct(years: number): number { return Math.min(years * 10, 100); }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.threeScene.init({ canvas: this.canvasRef.nativeElement, hideSun: true });
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const el = this.canvasRef.nativeElement;
+      this.threeScene.resize(el.clientWidth, el.clientHeight);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.threeScene.destroy();
+  }
 }
