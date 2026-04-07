@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#e8c96a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="360" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff06" stroke-width="0.5"/>
+  </pattern>
+  <rect width="600" height="360" fill="url(#grid)"/>
+  <rect x="0" y="0" width="600" height="3" fill="url(#gold)"/>
+
+  <!-- Browser chrome -->
+  <rect x="40" y="50" width="520" height="260" rx="10" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="40" y="50" width="520" height="36" rx="10" fill="#1a1a1a"/>
+  <rect x="40" y="72" width="520" height="14" fill="#1a1a1a"/>
+  <circle cx="62" cy="68" r="5" fill="#ff5f57"/>
+  <circle cx="79" cy="68" r="5" fill="#ffbd2e"/>
+  <circle cx="96" cy="68" r="5" fill="#28c840"/>
+  <!-- Address bar -->
+  <rect x="115" y="59" width="330" height="18" rx="9" fill="#252525" stroke="#333" stroke-width="1"/>
+  <text x="280" y="72" text-anchor="middle" font-family="monospace" font-size="10" fill="#555">Sankalan — Developer Portfolio</text>
+
+  <!-- Navbar sim -->
+  <rect x="40" y="86" width="520" height="30" fill="#111"/>
+  <text x="65" y="106" font-family="monospace" font-size="11" fill="#c9a84c" letter-spacing="2">SANKALAN</text>
+  <text x="350" y="106" font-family="monospace" font-size="10" fill="#555">Home</text>
+  <text x="400" y="106" font-family="monospace" font-size="10" fill="#555">About</text>
+  <text x="447" y="106" font-family="monospace" font-size="10" fill="#555">Projects</text>
+  <text x="505" y="106" font-family="monospace" font-size="10" fill="#555">Skills</text>
+
+  <!-- Hero area -->
+  <rect x="40" y="116" width="520" height="160" fill="#0a0a0a"/>
+  <!-- Stars dots -->
+  <circle cx="120" cy="135" r="1" fill="#fff" fill-opacity="0.4"/>
+  <circle cx="250" cy="145" r="1.5" fill="#fff" fill-opacity="0.3"/>
+  <circle cx="400" cy="130" r="1" fill="#fff" fill-opacity="0.5"/>
+  <circle cx="480" cy="155" r="1" fill="#fff" fill-opacity="0.3"/>
+  <circle cx="180" cy="160" r="1" fill="#fff" fill-opacity="0.4"/>
+  <circle cx="530" cy="140" r="1.5" fill="#fff" fill-opacity="0.2"/>
+  <circle cx="90" cy="175" r="1" fill="#fff" fill-opacity="0.3"/>
+  <circle cx="340" cy="170" r="1" fill="#fff" fill-opacity="0.4"/>
+
+  <text x="300" y="165" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#666">Hi, I'm</text>
+  <text x="300" y="192" text-anchor="middle" font-family="Georgia, serif" font-size="22" fill="#c9a84c" filter="url(#glow)" font-weight="bold">Nilabh Subramaniam</text>
+  <text x="300" y="215" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">Frontend Engineer · Angular · TypeScript · Three.js</text>
+  <rect x="230" y="228" width="80" height="24" rx="12" fill="#c9a84c" fill-opacity="0.9"/>
+  <text x="270" y="244" text-anchor="middle" font-family="monospace" font-size="10" fill="#0a0a0a" font-weight="bold">View Work</text>
+  <rect x="322" y="228" width="80" height="24" rx="12" fill="transparent" stroke="#c9a84c" stroke-width="1"/>
+  <text x="362" y="244" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9a84c">Contact</text>
+
+  <!-- Tech pills -->
+  <rect x="40" y="325" width="80" height="22" rx="11" fill="#dd1b16" fill-opacity="0.15" stroke="#dd1b16" stroke-width="1"/>
+  <text x="80" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">Angular 19</text>
+
+  <rect x="130" y="325" width="72" height="22" rx="11" fill="#3178c6" fill-opacity="0.15" stroke="#3178c6" stroke-width="1"/>
+  <text x="166" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#60a5fa">TypeScript</text>
+
+  <rect x="212" y="325" width="56" height="22" rx="11" fill="#049ef4" fill-opacity="0.15" stroke="#049ef4" stroke-width="1"/>
+  <text x="240" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#7dd3fc">Three.js</text>
+
+  <rect x="278" y="325" width="48" height="22" rx="11" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1"/>
+  <text x="302" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#7dd3fc">GSAP</text>
+
+  <rect x="336" y="325" width="48" height="22" rx="11" fill="#cc6699" fill-opacity="0.15" stroke="#cc6699" stroke-width="1"/>
+  <text x="360" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#f0abcb">SCSS</text>
+</svg>

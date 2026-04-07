@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="100%" style="stop-color:#111827"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#e8c96a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="360" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff08" stroke-width="0.5"/>
+  </pattern>
+  <rect width="600" height="360" fill="url(#grid)"/>
+
+  <!-- Gold accent bar top -->
+  <rect x="0" y="0" width="600" height="3" fill="url(#gold)"/>
+
+  <!-- Terminal window chrome -->
+  <rect x="40" y="50" width="520" height="260" rx="10" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="40" y="50" width="520" height="32" rx="10" fill="#1a1a1a"/>
+  <rect x="40" y="70" width="520" height="12" fill="#1a1a1a"/>
+  <circle cx="65" cy="66" r="6" fill="#ff5f57"/>
+  <circle cx="85" cy="66" r="6" fill="#ffbd2e"/>
+  <circle cx="105" cy="66" r="6" fill="#28c840"/>
+  <text x="300" y="71" text-anchor="middle" font-family="monospace" font-size="11" fill="#555">kapas — go backend</text>
+
+  <!-- Terminal content -->
+  <text x="65" y="110" font-family="'Courier New', monospace" font-size="12" fill="#6ee7b7">$ go run cmd/server/main.go</text>
+  <text x="65" y="132" font-family="'Courier New', monospace" font-size="11" fill="#4ade80">✓ Connected to PostgreSQL</text>
+  <text x="65" y="152" font-family="'Courier New', monospace" font-size="11" fill="#4ade80">✓ Redis cache ready</text>
+  <text x="65" y="172" font-family="'Courier New', monospace" font-size="11" fill="#4ade80">✓ Razorpay webhook registered</text>
+  <text x="65" y="192" font-family="'Courier New', monospace" font-size="11" fill="#60a5fa">→ Routes: /api/auth  /api/products  /api/orders</text>
+  <text x="65" y="212" font-family="'Courier New', monospace" font-size="11" fill="#60a5fa">→ Routes: /api/cart  /api/shipping  /api/admin</text>
+  <text x="65" y="232" font-family="'Courier New', monospace" font-size="11" fill="#a78bfa">→ Swagger UI: http://localhost:8080/swagger</text>
+  <text x="65" y="260" font-family="'Courier New', monospace" font-size="13" fill="#c9a84c" filter="url(#glow)">🚀 Tantuka backend listening on :8080</text>
+  <text x="65" y="285" font-family="'Courier New', monospace" font-size="11" fill="#555">█▌</text>
+
+  <!-- Tech pills bottom -->
+  <rect x="40" y="325" width="48" height="22" rx="11" fill="#00add8" fill-opacity="0.15" stroke="#00add8" stroke-width="1"/>
+  <text x="64" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#00add8">Go</text>
+
+  <rect x="98" y="325" width="56" height="22" rx="11" fill="#336791" fill-opacity="0.15" stroke="#336791" stroke-width="1"/>
+  <text x="126" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#7fb3d3">Postgres</text>
+
+  <rect x="164" y="325" width="48" height="22" rx="11" fill="#dc382d" fill-opacity="0.15" stroke="#dc382d" stroke-width="1"/>
+  <text x="188" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#dc382d">Redis</text>
+
+  <rect x="222" y="325" width="56" height="22" rx="11" fill="#1d63ed" fill-opacity="0.15" stroke="#1d63ed" stroke-width="1"/>
+  <text x="250" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#60a5fa">Docker</text>
+
+  <rect x="288" y="325" width="72" height="22" rx="11" fill="#c9a84c" fill-opacity="0.15" stroke="#c9a84c" stroke-width="1"/>
+  <text x="324" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9a84c">Razorpay</text>
+</svg>

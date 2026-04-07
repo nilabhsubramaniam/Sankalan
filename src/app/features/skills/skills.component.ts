@@ -47,22 +47,22 @@ type SkillCategory = Skill['category'] | 'all';
             <li>
               <div
                 class="skill-card fade-in"
-                [attr.aria-label]="skill.name + ' — ' + skill.level + '% proficiency'"
+                [attr.aria-label]="skill.name + ' — ' + skill.years + ' years experience'"
               >
                 <div class="skill-card__header">
                   <span class="skill-card__name">{{ skill.name }}</span>
-                  <span class="skill-card__level" aria-hidden="true">{{ skill.level }}%</span>
+                  <span class="skill-card__level" aria-hidden="true">{{ skill.years }} yrs</span>
                 </div>
                 <div
                   class="skill-card__bar"
                   role="progressbar"
-                  [attr.aria-valuenow]="skill.level"
+                  [attr.aria-valuenow]="skill.years"
                   aria-valuemin="0"
-                  aria-valuemax="100"
+                  aria-valuemax="10"
                 >
                   <div
                     class="skill-card__fill"
-                    [style.width.%]="skill.level"
+                    [style.width.%]="proficiencyPct(skill.years)"
                   ></div>
                 </div>
                 <span class="skill-card__category">{{ skill.category }}</span>
@@ -95,4 +95,7 @@ export class SkillsComponent {
   });
 
   setCategory(cat: SkillCategory): void { this.activeCategory.set(cat); }
+
+  /** Convert years of experience to a 0–100 bar width (capped at 10 yrs = 100 %) */
+  proficiencyPct(years: number): number { return Math.min(years * 10, 100); }
 }

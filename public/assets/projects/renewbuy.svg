@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="100%" style="stop-color:#0d1520"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#e8c96a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff05" stroke-width="0.5"/>
+  </pattern>
+  <rect width="600" height="360" fill="url(#grid)"/>
+  <rect x="0" y="0" width="600" height="3" fill="url(#gold)"/>
+
+  <!-- Browser chrome -->
+  <rect x="40" y="50" width="520" height="260" rx="10" fill="#080e1c" stroke="#1e2a40" stroke-width="1"/>
+  <rect x="40" y="50" width="520" height="36" rx="10" fill="#0f1928"/>
+  <rect x="40" y="72" width="520" height="14" fill="#0f1928"/>
+  <circle cx="62" cy="68" r="5" fill="#ff5f57"/>
+  <circle cx="79" cy="68" r="5" fill="#ffbd2e"/>
+  <circle cx="96" cy="68" r="5" fill="#28c840"/>
+  <rect x="115" y="59" width="330" height="18" rx="9" fill="#152030" stroke="#1e2a40" stroke-width="1"/>
+  <text x="280" y="72" text-anchor="middle" font-family="monospace" font-size="10" fill="#445">Renewbuy — Insurance Platform</text>
+
+  <!-- App navbar -->
+  <rect x="40" y="86" width="520" height="32" fill="#0a1520"/>
+  <text x="70" y="107" font-family="sans-serif" font-size="13" fill="#4a9eff" font-weight="bold">Renewbuy</text>
+  <text x="380" y="107" font-family="sans-serif" font-size="10" fill="#445">Health</text>
+  <text x="424" y="107" font-family="sans-serif" font-size="10" fill="#445">Motor</text>
+  <text x="466" y="107" font-family="sans-serif" font-size="10" fill="#445">Life</text>
+  <text x="500" y="107" font-family="sans-serif" font-size="10" fill="#445">Travel</text>
+
+  <!-- Insurance journey steps -->
+  <rect x="55" y="130" width="490" height="50" rx="6" fill="#0d1e30" stroke="#1e3050" stroke-width="1"/>
+  <!-- Step dots -->
+  <circle cx="110" cy="155" r="14" fill="#1e3a5f" stroke="#4a9eff" stroke-width="2"/>
+  <text x="110" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#4a9eff">1</text>
+  <line x1="124" y1="155" x2="198" y2="155" stroke="#1e3a5f" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="212" cy="155" r="14" fill="#1e3a5f" stroke="#4a9eff" stroke-width="2"/>
+  <text x="212" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#4a9eff">2</text>
+  <line x1="226" y1="155" x2="300" y2="155" stroke="#1e3a5f" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="314" cy="155" r="14" fill="#4a9eff" stroke="#4a9eff" stroke-width="2"/>
+  <text x="314" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#fff">3</text>
+  <line x1="328" y1="155" x2="400" y2="155" stroke="#1e3a5f" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="414" cy="155" r="14" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+  <text x="414" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#445">4</text>
+  <line x1="428" y1="155" x2="502" y2="155" stroke="#1e3a5f" stroke-width="2" stroke-dasharray="4 2"/>
+  <circle cx="516" cy="155" r="14" fill="#1e3a5f" stroke="#1e3a5f" stroke-width="2"/>
+  <text x="516" y="160" text-anchor="middle" font-family="monospace" font-size="11" fill="#445">5</text>
+
+  <!-- Plan cards -->
+  <rect x="55" y="195" width="150" height="90" rx="6" fill="#0d1e30" stroke="#28c840" stroke-width="1.5"/>
+  <text x="130" y="220" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#88e888">Health Plan</text>
+  <text x="130" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#fff" font-weight="bold">₹8,250</text>
+  <text x="130" y="258" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#445">/year · 5L cover</text>
+  <rect x="75" y="267" width="110" height="10" rx="5" fill="#4a9eff" fill-opacity="0.8"/>
+
+  <rect x="220" y="195" width="150" height="90" rx="6" fill="#0d1e30" stroke="#1e3050" stroke-width="1"/>
+  <text x="295" y="220" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8888ee">Motor Plan</text>
+  <text x="295" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#fff" font-weight="bold">₹4,100</text>
+  <text x="295" y="258" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#445">/year · comp.</text>
+
+  <rect x="385" y="195" width="150" height="90" rx="6" fill="#0d1e30" stroke="#1e3050" stroke-width="1"/>
+  <text x="460" y="220" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#ee8888">Life Plan</text>
+  <text x="460" y="240" text-anchor="middle" font-family="monospace" font-size="14" fill="#fff" font-weight="bold">₹12,800</text>
+  <text x="460" y="258" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#445">/year · 1Cr term</text>
+
+  <!-- Tech pills -->
+  <rect x="40" y="325" width="76" height="22" rx="11" fill="#dd1b16" fill-opacity="0.15" stroke="#dd1b16" stroke-width="1"/>
+  <text x="78" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#f87171">Angular 12</text>
+
+  <rect x="126" y="325" width="88" height="22" rx="11" fill="#3f51b5" fill-opacity="0.15" stroke="#3f51b5" stroke-width="1"/>
+  <text x="170" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#818cf8">Ang. Material</text>
+
+  <rect x="224" y="325" width="64" height="22" rx="11" fill="#7952b3" fill-opacity="0.15" stroke="#7952b3" stroke-width="1"/>
+  <text x="256" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#c4b5fd">Bootstrap</text>
+
+  <rect x="298" y="325" width="48" height="22" rx="11" fill="#269539" fill-opacity="0.15" stroke="#269539" stroke-width="1"/>
+  <text x="322" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#86efac">NGINX</text>
+
+  <rect x="356" y="325" width="56" height="22" rx="11" fill="#c9a84c" fill-opacity="0.15" stroke="#c9a84c" stroke-width="1"/>
+  <text x="384" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9a84c">SSO SDK</text>
+</svg>

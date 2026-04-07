@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#0d1510"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#e8c96a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff05" stroke-width="0.5"/>
+  </pattern>
+  <rect width="600" height="360" fill="url(#grid)"/>
+  <rect x="0" y="0" width="600" height="3" fill="url(#gold)"/>
+
+  <!-- Browser chrome -->
+  <rect x="40" y="50" width="520" height="260" rx="10" fill="#080c09" stroke="#182018" stroke-width="1"/>
+  <rect x="40" y="50" width="520" height="36" rx="10" fill="#10180f"/>
+  <rect x="40" y="72" width="520" height="14" fill="#10180f"/>
+  <circle cx="62" cy="68" r="5" fill="#ff5f57"/>
+  <circle cx="79" cy="68" r="5" fill="#ffbd2e"/>
+  <circle cx="96" cy="68" r="5" fill="#28c840"/>
+  <rect x="115" y="59" width="330" height="18" rx="9" fill="#182018" stroke="#202820" stroke-width="1"/>
+  <text x="280" y="72" text-anchor="middle" font-family="monospace" font-size="10" fill="#445">Echelon Cuisine</text>
+
+  <!-- Hero image area -->
+  <rect x="40" y="86" width="520" height="130" fill="#0d1510"/>
+  <!-- Gradient overlay suggesting a food image -->
+  <rect x="40" y="86" width="520" height="130" fill="url(#foodbg)" opacity="0.6"/>
+  <defs>
+    <radialGradient id="foodbg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2d4a20"/>
+      <stop offset="100%" stop-color="#0d1510"/>
+    </radialGradient>
+  </defs>
+  <!-- Plate/food silhouette hint -->
+  <circle cx="300" cy="148" r="45" fill="#1a2e15" stroke="#2a4020" stroke-width="1"/>
+  <circle cx="300" cy="148" r="35" fill="#213818" stroke="#2a4020" stroke-width="0.5"/>
+  <text x="300" y="155" text-anchor="middle" font-size="22">🍽</text>
+
+  <text x="300" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#c9a84c" font-weight="bold" letter-spacing="3">ECHELON CUISINE</text>
+  <text x="300" y="116" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060" letter-spacing="2">FINE DINING EXPERIENCE</text>
+
+  <!-- Nav bar -->
+  <rect x="40" y="86" width="520" height="28" fill="#0a0f09" fill-opacity="0.95"/>
+  <text x="180" y="104" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Menu</text>
+  <text x="240" y="104" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Specials</text>
+  <text x="300" y="104" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#c9a84c">Reservations</text>
+  <text x="370" y="104" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Catering</text>
+  <text x="430" y="104" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Location</text>
+
+  <!-- Daily specials -->
+  <rect x="55" y="228" width="140" height="75" rx="6" fill="#0f180d" stroke="#1e2e1a" stroke-width="1"/>
+  <text x="125" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Today's Special</text>
+  <text x="125" y="268" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#fff">Truffle Risotto</text>
+  <text x="125" y="284" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9a84c">₹1,850</text>
+
+  <rect x="208" y="228" width="140" height="75" rx="6" fill="#0f180d" stroke="#1e2e1a" stroke-width="1"/>
+  <text x="278" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Chef's Choice</text>
+  <text x="278" y="268" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#fff">Sea Bass Fillet</text>
+  <text x="278" y="284" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9a84c">₹2,200</text>
+
+  <rect x="361" y="228" width="154" height="75" rx="6" fill="#0f180d" stroke="#1e2e1a" stroke-width="1"/>
+  <!-- Google maps hint -->
+  <text x="438" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#6a8060">Find Us</text>
+  <circle cx="438" cy="272" r="10" fill="#4285f4" fill-opacity="0.3" stroke="#4285f4" stroke-width="1"/>
+  <text x="438" y="277" text-anchor="middle" font-size="10">📍</text>
+  <text x="438" y="294" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6a8060">View on Maps</text>
+
+  <!-- Tech pills -->
+  <rect x="40" y="325" width="72" height="22" rx="11" fill="#000" fill-opacity="0.5" stroke="#333" stroke-width="1"/>
+  <text x="76" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">Next.js 14</text>
+
+  <rect x="122" y="325" width="72" height="22" rx="11" fill="#3178c6" fill-opacity="0.15" stroke="#3178c6" stroke-width="1"/>
+  <text x="158" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#60a5fa">TypeScript</text>
+
+  <rect x="204" y="325" width="80" height="22" rx="11" fill="#06b6d4" fill-opacity="0.15" stroke="#06b6d4" stroke-width="1"/>
+  <text x="244" y="340" text-anchor="middle" font-family="monospace" font-size="10" fill="#67e8f9">Tailwind CSS</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360" viewBox="0 0 600 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="100%" style="stop-color:#0d1520"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00a8e8"/>
+      <stop offset="100%" style="stop-color:#0072ce"/>
+    </linearGradient>
+    <linearGradient id="greenLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00e676"/>
+      <stop offset="100%" style="stop-color:#00c853"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="360" fill="url(#bg)"/>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff05" stroke-width="0.5"/>
+  </pattern>
+  <rect width="600" height="360" fill="url(#grid)"/>
+  <rect x="0" y="0" width="600" height="3" fill="url(#accent)"/>
+
+  <!-- Browser chrome -->
+  <rect x="40" y="50" width="520" height="260" rx="10" fill="#080e1c" stroke="#1e2a40" stroke-width="1"/>
+  <rect x="40" y="50" width="520" height="36" rx="10" fill="#0f1928"/>
+  <rect x="40" y="72" width="520" height="14" fill="#0f1928"/>
+  <circle cx="62" cy="68" r="5" fill="#ff5f57"/>
+  <circle cx="79" cy="68" r="5" fill="#ffbd2e"/>
+  <circle cx="96" cy="68" r="5" fill="#28c840"/>
+  <rect x="115" y="59" width="330" height="18" rx="9" fill="#152030" stroke="#1e2a40" stroke-width="1"/>
+  <text x="280" y="72" text-anchor="middle" font-family="monospace" font-size="10" fill="#445">amasol — IT Observability Platform</text>
+
+  <!-- Navbar -->
+  <rect x="40" y="86" width="520" height="30" fill="#0a1520"/>
+  <text x="70" y="106" font-family="sans-serif" font-size="13" fill="#00a8e8" font-weight="bold">amasol</text>
+  <text x="340" y="106" font-family="sans-serif" font-size="10" fill="#556">Usability</text>
+  <text x="392" y="106" font-family="sans-serif" font-size="10" fill="#556">Observability</text>
+  <text x="462" y="106" font-family="sans-serif" font-size="10" fill="#556">Detectability</text>
+
+  <!-- Dashboard panels row 1 -->
+  <!-- Uptime card -->
+  <rect x="55" y="128" width="115" height="70" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="68" y="146" font-family="sans-serif" font-size="9" fill="#556">UPTIME</text>
+  <text x="68" y="174" font-family="sans-serif" font-size="22" fill="#00e676" font-weight="bold">99.9%</text>
+  <text x="68" y="190" font-family="sans-serif" font-size="8" fill="#445">Last 30 days</text>
+
+  <!-- Latency card -->
+  <rect x="180" y="128" width="115" height="70" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="193" y="146" font-family="sans-serif" font-size="9" fill="#556">AVG LATENCY</text>
+  <text x="193" y="174" font-family="sans-serif" font-size="22" fill="#00a8e8" font-weight="bold">42ms</text>
+  <text x="193" y="190" font-family="sans-serif" font-size="8" fill="#445">p95: 120ms</text>
+
+  <!-- Alerts card -->
+  <rect x="305" y="128" width="115" height="70" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="318" y="146" font-family="sans-serif" font-size="9" fill="#556">OPEN ALERTS</text>
+  <text x="318" y="174" font-family="sans-serif" font-size="22" fill="#ffbd2e" font-weight="bold">3</text>
+  <text x="318" y="190" font-family="sans-serif" font-size="8" fill="#445">2 warn · 1 info</text>
+
+  <!-- Requests card -->
+  <rect x="430" y="128" width="115" height="70" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="443" y="146" font-family="sans-serif" font-size="9" fill="#556">REQUESTS/s</text>
+  <text x="443" y="174" font-family="sans-serif" font-size="22" fill="#ce93d8" font-weight="bold">1.2k</text>
+  <text x="443" y="190" font-family="sans-serif" font-size="8" fill="#445">+8% vs yesterday</text>
+
+  <!-- Observability sparkline chart -->
+  <rect x="55" y="210" width="320" height="80" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="70" y="228" font-family="sans-serif" font-size="9" fill="#556">RESPONSE TIME (ms)</text>
+  <!-- Axes -->
+  <line x1="70" y1="278" x2="360" y2="278" stroke="#1e2a40" stroke-width="1"/>
+  <!-- Sparkline -->
+  <polyline points="70,260 100,258 130,265 160,250 190,268 220,248 250,255 280,244 310,252 340,242 360,248"
+            fill="none" stroke="url(#accent)" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Area fill -->
+  <polygon points="70,260 100,258 130,265 160,250 190,268 220,248 250,255 280,244 310,252 340,242 360,248 360,278 70,278"
+           fill="#00a8e8" opacity="0.07"/>
+
+  <!-- Service health list -->
+  <rect x="385" y="210" width="160" height="80" rx="6" fill="#0d1e30" stroke="#1a2e48" stroke-width="1"/>
+  <text x="400" y="228" font-family="sans-serif" font-size="9" fill="#556">SERVICE HEALTH</text>
+  <circle cx="400" cy="244" r="4" fill="#00e676"/>
+  <text x="410" y="248" font-family="sans-serif" font-size="9" fill="#778">API Gateway</text>
+  <circle cx="400" cy="260" r="4" fill="#00e676"/>
+  <text x="410" y="264" font-family="sans-serif" font-size="9" fill="#778">Auth Service</text>
+  <circle cx="400" cy="276" r="4" fill="#ffbd2e"/>
+  <text x="410" y="280" font-family="sans-serif" font-size="9" fill="#778">Analytics</text>
+
+  <!-- Bottom branding -->
+  <text x="300" y="340" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#334">Usability · Observability · Detectability · IT-Reliability</text>
+</svg>
