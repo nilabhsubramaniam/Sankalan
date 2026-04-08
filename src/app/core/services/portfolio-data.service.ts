@@ -220,7 +220,6 @@ export class PortfolioDataService {
   }
 
   submitContact(form: ContactForm): Observable<{ success: boolean }> {
-    console.log('[ContactForm mock submit]', form);
-    return of({ success: true });
+    return this.api.post<{ success: boolean }>('/contact', form);
   }
 }

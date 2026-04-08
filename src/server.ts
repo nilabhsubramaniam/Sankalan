@@ -6,23 +6,50 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
+import { Resend } from 'resend';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+// ── Contact form API ──────────────────────────────────────────
+app.use(express.json());
+
+app.post('/api/contact', async (req, res) => {
+  const { name, email, subject, message } = req.body ?? {};
+
+  if (!name || !email || !subject || !message) {
+    res.status(400).json({ message: 'All fields are required.', status: 400 });
+    return;
+  }
+
+  const apiKey = process.env['RESEND_API_KEY'];
+  if (!apiKey) {
+    res.status(500).json({ message: 'Mail service not configured.', status: 500 });
+    return;
+  }
+
+  const resend = new Resend(apiKey);
+  const { error } = await resend.emails.send({
+    from: 'Portfolio Contact <onboarding@resend.dev>',
+    to: 'nilabhsubramaniam@gmail.com',
+    replyTo: email,
+    subject: `[Sankalan] ${subject}`,
+    text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+    html: `<p><strong>Name:</strong> ${name}</p>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Message:</strong></p>
+           <p>${message.replace(/\n/g, '<br>')}</p>`,
+  });
+
+  if (error) {
+    res.status(500).json({ message: 'Failed to send message.', status: 500 });
+    return;
+  }
+
+  res.status(200).json({ data: { success: true }, status: 200 });
+});
 
 /**
  * Serve static files from /browser

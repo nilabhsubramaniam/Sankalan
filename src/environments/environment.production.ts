@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://api.sankalan.dev/api/v1',
+  apiBaseUrl: '/api',
   siteUrl: 'https://sankalan.dev',
 };
