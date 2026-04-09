@@ -227,7 +227,9 @@ export class ContactComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.threeScene.init({ canvas: this.canvasRef.nativeElement, hideSun: true });
+      requestAnimationFrame(() => {
+        this.threeScene.init({ canvas: this.canvasRef.nativeElement, hideSun: true });
+      });
     }
   }
 

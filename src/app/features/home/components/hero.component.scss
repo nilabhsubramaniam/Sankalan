@@ -18,15 +18,15 @@
     display: block;
   }
 
-  // ── Vignette: subtle scrim around text, lets sun glow bleed through elsewhere
+  // ── Vignette: scrim covers content area, lets sun glow bleed through elsewhere
   &__overlay {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 55% 50% at 16% 42%,
-        rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.28) 55%, transparent 100%),
+      radial-gradient(ellipse 62% 60% at 14% 48%,
+        rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.52) 48%, transparent 100%),
       linear-gradient(180deg,
-        rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.0) 40%, rgba(0, 0, 0, 0.50) 100%);
+        rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.55) 100%);
     z-index: var(--z-base);
     pointer-events: none;
   }
@@ -87,11 +87,12 @@
     font-weight: var(--weight-regular);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.78);
     text-decoration: none;
     position: relative;
     padding-bottom: 3px;
     transition: color 0.35s ease;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
 
     span {
       display: inline-block;
@@ -106,12 +107,12 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.7);
       transition: width 0.4s ease;
     }
 
     &:hover {
-      color: rgba(255, 255, 255, 0.85);
+      color: #ffffff;
       span { transform: translate(3px, -3px); }
       &::after { width: 100%; }
     }

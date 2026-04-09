@@ -72,7 +72,7 @@ export class ThreeSceneService {
 
   // ─── Sun
   private readonly SUN_POS    = new THREE.Vector3(-18, 12, -120);
-  private readonly SUN_RADIUS = 38;
+  private readonly SUN_RADIUS = 34;
   private sun?:        THREE.Mesh;
   private sunCorona?:  THREE.Mesh;
   private sunCorona2?: THREE.Mesh;
@@ -128,8 +128,8 @@ export class ThreeSceneService {
     this.cometMaterial   = undefined;
 
     const { canvas } = options;
-    const w = canvas.clientWidth || window.innerWidth;
-    const h = canvas.clientHeight || window.innerHeight;
+    const w = (canvas.clientWidth  > 0 ? canvas.clientWidth  : canvas.getBoundingClientRect().width)  || window.innerWidth;
+    const h = (canvas.clientHeight > 0 ? canvas.clientHeight : canvas.getBoundingClientRect().height) || window.innerHeight;
 
     this.buildScene();
     this.buildCamera(w, h);

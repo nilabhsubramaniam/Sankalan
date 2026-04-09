@@ -64,8 +64,11 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.threeScene.init({ canvas: this.canvasRef.nativeElement });
-      this.animService.heroEntrance(this.canvasRef.nativeElement.parentElement!);
+      // Defer one frame so the canvas has layout dimensions after hydration
+      requestAnimationFrame(() => {
+        this.threeScene.init({ canvas: this.canvasRef.nativeElement });
+        this.animService.heroEntrance(this.canvasRef.nativeElement.parentElement!);
+      });
     }
   }
 
