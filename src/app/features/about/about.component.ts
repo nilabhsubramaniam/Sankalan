@@ -49,13 +49,29 @@ import { ThreeSceneService } from '../../three/scenes/particle-scene.service';
                 vector databases like ChromaDB, and LangChain to build intelligent,
                 context-aware applications.
               </p>
+
               <div class="about__meta-row">
                 <span class="about__meta-chip"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Gurugram, Haryana</span>
                 <span class="about__meta-chip"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91 9158364522</span>
                 <span class="about__meta-chip"><i class="fa-solid fa-envelope" aria-hidden="true"></i> nilabhsubramaniam@gmail.com</span>
                 <span class="about__meta-chip"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> B.Tech — NMIMS Mumbai</span>
                 <span class="about__meta-chip"><i class="fa-solid fa-language" aria-hidden="true"></i> English · Hindi · Maithili</span>
+                <a
+                  href="/assets/Nilabh_Subramaniam_CV.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="about__cv-btn"
+                  aria-label="View and download Nilabh Subramaniam CV as PDF"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                       stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M12 3v13m0 0l-4-4m4 4l4-4M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
+                  </svg>
+                  Download CV
+                </a>
               </div>
+
             </div>
           </div>
         </div>

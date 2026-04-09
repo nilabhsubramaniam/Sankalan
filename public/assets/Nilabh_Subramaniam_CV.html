@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilabh Subramaniam — CV</title>
+  <style>
+    :root {
+      --gold:       #c9a84c;
+      --gold-light: #e8c96a;
+      --bg:         #0a0a0f;
+      --bg-card:    #111118;
+      --text:       #e8e6e1;
+      --muted:      #8b8b9a;
+      --border:     rgba(201,168,76,0.15);
+      --font:       'Segoe UI', system-ui, -apple-system, sans-serif;
+      --mono:       'Consolas', 'Courier New', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    /* ── Print button (screen only) ─────────────────────────── */
+    .save-btn {
+      position: fixed;
+      top: 20px; right: 20px;
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 18px;
+      background: var(--gold);
+      color: #0a0a0f;
+      border: none; border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      z-index: 999;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .save-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── Layout ──────────────────────────────────────────────── */
+    .cv {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 44px;
+    }
+
+    /* ── Header ─────────────────────────────────────────────── */
+    .cv__header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: start;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+    .cv__name {
+      font-size: 34px;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .cv__name span { color: var(--gold); }
+    .cv__title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .cv__contacts { display: flex; flex-direction: column; gap: 5px; text-align: right; }
+    .cv__contact {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: flex-end; gap: 7px;
+    }
+    .cv__contact a { color: var(--gold); text-decoration: none; }
+    .cv__contact a:hover { text-decoration: underline; }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    .section { margin-bottom: 34px; }
+    .section__label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .section__title {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    /* ── Summary ─────────────────────────────────────────────── */
+    .summary {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 74ch;
+    }
+
+    /* ── Experience entries ──────────────────────────────────── */
+    .entry {
+      display: grid;
+      grid-template-columns: 152px 1fr;
+      gap: 0 22px;
+      margin-bottom: 22px;
+    }
+    .entry__meta { padding-top: 2px; }
+    .entry__year {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .entry__company {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+    .entry__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .entry__desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Skills grid ─────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 16px;
+    }
+    .skill-group__title {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .skill-item {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .skill-item span {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(201,168,76,0.55);
+    }
+
+    /* ── Projects ────────────────────────────────────────────── */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .project-card__name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .project-card__desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 9px;
+    }
+    .project-card__tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 3px;
+      padding: 1px 6px;
+    }
+
+    /* ── Certifications ──────────────────────────────────────── */
+    .cert-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.07);
+    }
+    .cert-item:last-child { border-bottom: none; }
+    .cert-name { font-size: 13px; color: var(--text); }
+    .cert-meta { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: right; }
+    .cert-meta a { color: var(--gold); text-decoration: none; font-size: 10px; }
+
+    /* ── Print styles ────────────────────────────────────────── */
+    @media print {
+      @page { size: A4; margin: 14mm 14mm; }
+
+      :root {
+        --gold:    #7a5c10;
+        --bg:      #ffffff;
+        --bg-card: #f5f5f5;
+        --text:    #111111;
+        --muted:   #4a4a4a;
+        --border:  rgba(0,0,0,0.13);
+      }
+
+      body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .save-btn { display: none; }
+      .cv { padding: 0; max-width: 100%; }
+      .entry, .project-card, .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="save-btn" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v13m0 0l-4-4m4 4l4-4M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2"/>
+    </svg>
+    Save as PDF
+  </button>
+
+  <div class="cv">
+
+    <!-- ── Header ──────────────────────────────────────────── -->
+    <header class="cv__header">
+      <div>
+        <h1 class="cv__name">Nilabh <span>Subramaniam</span></h1>
+        <p class="cv__title">Senior Frontend Engineer &nbsp;·&nbsp; Angular &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; Go</p>
+      </div>
+      <div class="cv__contacts">
+        <p class="cv__contact">📍 Gurugram, Haryana, India</p>
+        <p class="cv__contact">📞 +91 9158364522</p>
+        <p class="cv__contact">✉ <a href="mailto:nilabhsubramaniam@gmail.com">nilabhsubramaniam@gmail.com</a></p>
+        <p class="cv__contact"><a href="https://www.linkedin.com/in/nilabhsubramaniam" target="_blank">linkedin.com/in/nilabhsubramaniam</a></p>
+        <p class="cv__contact"><a href="https://github.com/nilabhsubramaniam" target="_blank">github.com/nilabhsubramaniam</a></p>
+      </div>
+    </header>
+
+    <!-- ── Summary ─────────────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Profile</span>
+      <h2 class="section__title">Summary</h2>
+      <p class="summary">
+        Frontend Engineer with <strong>8.5+ years</strong> of experience building scalable, high-performance
+        web applications. Specialising in Angular, TypeScript, and SCSS — shipping products that are fast,
+        accessible, and maintainable. Experienced across the full stack with growing expertise in Go microservices,
+        PostgreSQL, and AI/LLM integrations using Ollama and LangChain.
+      </p>
+    </section>
+
+    <!-- ── Experience ──────────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Career</span>
+      <h2 class="section__title">Work Experience</h2>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">Sep 2022 – Present</span>
+          <span class="entry__company">Amasol, Gurugram</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Software Developer</h3>
+          <p class="entry__desc">Developing web applications for a Service Level Management (SLM) platform using Angular. Building and maintaining dashboards, workflows and reporting modules backed by PostgreSQL, with Java-based backend services and Docker-based deployments. Serving enterprise clients including T-Systems, EWE, and FI-TS.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2018 – 2022</span>
+          <span class="entry__company">Renewbuy, Gurugram</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Software Developer</h3>
+          <p class="entry__desc">Built end-to-end insurance journeys (Life, Health, Motor, Travel, Corporate) using Angular 8–12. Architected an SSO-SDK adopted across the entire Renewbuy platform. Led performance revamp and production deployment via NGINX.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">Jan – May 2018</span>
+          <span class="entry__company">BPRISE, Mumbai</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Software Developer</h3>
+          <p class="entry__desc">Developed advertiser and publisher panels using AngularJS and REST APIs. Built beacon-based user interest tracking for ad targeting.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2016 – 2017</span>
+          <span class="entry__company">Finatwork, Bangalore</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Software Developer</h3>
+          <p class="entry__desc">Built "intelligent." — a mutual fund investment, tax optimisation, insurance and estate planning platform using AngularJS.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2015 – 2016</span>
+          <span class="entry__company">Filantindia, Mumbai</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Trainee Developer</h3>
+          <p class="entry__desc">Developed a pharmaceutical information website for patients and doctors, built with JavaScript, HTML5, CSS and Bootstrap.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Skills ──────────────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Expertise</span>
+      <h2 class="section__title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div>
+          <h3 class="skill-group__title">Frontend</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Angular <span>8 yrs</span></li>
+            <li class="skill-item">TypeScript <span>6 yrs</span></li>
+            <li class="skill-item">JavaScript <span>8 yrs</span></li>
+            <li class="skill-item">SCSS / CSS <span>8 yrs</span></li>
+            <li class="skill-item">Three.js <span>1 yr</span></li>
+            <li class="skill-item">Bootstrap <span>7 yrs</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="skill-group__title">Backend</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Go / Gin <span>1 yr</span></li>
+            <li class="skill-item">Python / FastAPI <span>1 yr</span></li>
+            <li class="skill-item">PostgreSQL <span>1 yr</span></li>
+            <li class="skill-item">Redis <span>1 yr</span></li>
+            <li class="skill-item">Docker <span>1 yr</span></li>
+            <li class="skill-item">NGINX <span>1 yr</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="skill-group__title">AI / LLM</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Ollama (Llama 3) <span>1 yr</span></li>
+            <li class="skill-item">LangChain <span>1 yr</span></li>
+            <li class="skill-item">ChromaDB <span>1 yr</span></li>
+            <li class="skill-item">RAG Pipelines <span>1 yr</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="skill-group__title">Tools</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Git <span>8 yrs</span></li>
+            <li class="skill-item">GitHub Actions <span>1 yr</span></li>
+            <li class="skill-item">Fly.io / Vercel</li>
+            <li class="skill-item">Swagger / OpenAPI</li>
+            <li class="skill-item">JIRA / Confluence</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Projects ────────────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Work</span>
+      <h2 class="section__title">Key Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3 class="project-card__name">Kapas — E-Commerce Backend</h3>
+          <p class="project-card__desc">Production-grade Go backend for Tantuka saree marketplace. Full order lifecycle, Razorpay payments, Redis cart, Shiprocket logistics, 25-table PostgreSQL schema.</p>
+          <div class="project-card__tags">
+            <span class="tag">Go</span><span class="tag">Gin</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Razorpay</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3 class="project-card__name">ArthaLedger — Finance API</h3>
+          <p class="project-card__desc">Self-hosted personal finance REST API. Multi-account tracking, auto-categorisation, budget alerts, 102 unit tests across all service layers.</p>
+          <div class="project-card__tags">
+            <span class="tag">Go</span><span class="tag">Gin</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">JWT</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3 class="project-card__name">IDA — Interactive Resume Builder</h3>
+          <p class="project-card__desc">Angular 19 drag-and-drop resume builder with multiple professional templates, live theme picker, PDF export, and Three.js starfield.</p>
+          <div class="project-card__tags">
+            <span class="tag">Angular 19</span><span class="tag">TypeScript</span><span class="tag">Three.js</span><span class="tag">Go</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3 class="project-card__name">RAG Chatbot — Hackathon 2024</h3>
+          <p class="project-card__desc">Retrieval-Augmented Generation chatbot using Ollama (Llama 3), ChromaDB, and FastAPI. Answers internal document queries with cited sources.</p>
+          <div class="project-card__tags">
+            <span class="tag">Python</span><span class="tag">Ollama</span><span class="tag">ChromaDB</span><span class="tag">LangChain</span><span class="tag">FastAPI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Education ────────────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Academics</span>
+      <h2 class="section__title">Education</h2>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2015</span>
+          <span class="entry__company">NMIMS, Mumbai</span>
+        </div>
+        <div>
+          <h3 class="entry__title">B.Tech — Computer Science Engineering</h3>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2010</span>
+          <span class="entry__company">Leeds Asian School, Patna</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Higher Secondary — Class XII</h3>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry__meta">
+          <span class="entry__year">2008</span>
+          <span class="entry__company">St. Karen's School, Patna</span>
+        </div>
+        <div>
+          <h3 class="entry__title">Secondary School — Class X</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Certifications ───────────────────────────────────── -->
+    <section class="section">
+      <span class="section__label">Learning</span>
+      <h2 class="section__title">Certifications</h2>
+      <div class="cert-item">
+        <span class="cert-name">Cybersecurity Specialization</span>
+        <span class="cert-meta">
+          Coursera · 2024 &nbsp;
+          <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/TV0BCNT5M3XS" target="_blank">View ↗</a>
+        </span>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

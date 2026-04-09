@@ -340,6 +340,119 @@
 
     i { color: var(--color-accent); font-size: 0.75rem; }
   }
+
+  &__cv-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+
+    // Shimmer sweep layer
+    &::after {
+      content: '';
+      position: absolute;
+      top: -10%; left: 0;
+      width: 38%; height: 120%;
+      background: linear-gradient(
+        105deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+      );
+      transform: translateX(-130%) skewX(-15deg);
+      pointer-events: none;
+    }
+
+    // Sparkle dots layer
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 1.2px, transparent 1.2px),
+        radial-gradient(circle, rgba(255, 230, 100, 0.9)  1px,   transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.8)  1px,   transparent 1px),
+        radial-gradient(circle, rgba(255, 200, 60,  0.85) 1.2px, transparent 1.2px);
+      background-size: 22% 100%, 28% 100%, 18% 100%, 32% 100%;
+      background-position: 12% -14px, 38% -14px, 65% -14px, 85% -14px;
+      background-repeat: no-repeat;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    svg {
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+      transition: transform 0.25s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      animation: cv-glow-pulse 1.4s ease infinite;
+
+      &::after  { animation: cv-shimmer  0.58s ease forwards; }
+      &::before { animation: cv-sparkle  0.65s ease forwards; }
+
+      svg { transform: translateY(2px); }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+  }
+}
+
+// ── CV button animations ───────────────────────────────────────
+@keyframes cv-shimmer {
+  0%   { transform: translateX(-130%) skewX(-15deg); }
+  100% { transform: translateX(230%)  skewX(-15deg); }
+}
+
+@keyframes cv-sparkle {
+  0%   {
+    opacity: 0;
+    background-position: 12% -14px, 38% -14px, 65% -14px, 85% -14px;
+  }
+  35%  {
+    opacity: 1;
+    background-position: 12% 40%, 38% 55%, 65% 35%, 85% 50%;
+  }
+  65%  {
+    opacity: 0.85;
+    background-position: 12% 50%, 38% 50%, 65% 50%, 85% 50%;
+  }
+  100% {
+    opacity: 0;
+    background-position: 12% calc(100% + 14px), 38% calc(100% + 14px), 65% calc(100% + 14px), 85% calc(100% + 14px);
+  }
+}
+
+@keyframes cv-glow-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0  6px rgba(201, 168, 76, 0.2),
+      0 0 16px rgba(201, 168, 76, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 10px rgba(201, 168, 76, 0.38),
+      0 0 24px rgba(201, 168, 76, 0.18),
+      0 0 40px rgba(201, 168, 76, 0.08);
+  }
 }
 
 // ─── Skills ───────────────────────────────────────────────────
