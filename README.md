@@ -103,9 +103,6 @@ src/
 
 - **Mock-first, backend-ready** — all data lives in `PortfolioDataService` as typed mock arrays. Every method returns an `Observable<T>` matching Go backend contracts defined in `api.models.ts`. Switching to a real API is a one-line change per method.
 - **SSR** — the app ships with `outputMode: "server"`, meaning Angular renders HTML on the server for every request. This gives real first-paint content for crawlers and users alike, unlike prerendering.
-- **API on the same process** — the Express server that hosts Angular SSR also exposes `/api/contact`. No separate service, no CORS configuration needed.
-- **Secrets** — `RESEND_API_KEY` lives only in Fly.io secrets. `FLY_API_TOKEN` lives only in GitHub Actions secrets. Neither appears in the repository.
-
 ---
 
 ## Getting Started
